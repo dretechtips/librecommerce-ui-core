@@ -1,5 +1,5 @@
 {
-  "name": "admin",
+  "name": "core",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,6 +13,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/react-tag-input": "^6.1.2",
     "@types/rfdc": "^1.1.0",
+    "@types/uuid": "^8.0.0",
     "axios": "^0.19.2",
     "jspdf": "^1.5.3",
     "quagga": "^0.12.1",
@@ -24,7 +25,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
     "react-tag-input": "^6.4.2",
-    "rfdc": "^1.1.4"
+    "rfdc": "^1.1.4",
+    "uuid": "^8.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
