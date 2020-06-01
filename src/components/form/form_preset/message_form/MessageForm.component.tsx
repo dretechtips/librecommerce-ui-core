@@ -2,13 +2,14 @@ import React from "react";
 import {
   MessageFormUIProps,
   MessageFormQuestions,
-} from "../interface/MessageForm.interface";
-import Card from "./Card";
-import Form from "../containers/Form";
+} from "./MessageForm.interface";
+import Card from "src/components/card/Card.container";
+import Form from "src/components/form/Form.container";
 
 function MessageForm(props: MessageFormUIProps) {
   return (
     <Form
+      to={"path/random"}
       fields={{
         questions: props.questions,
         modifier: "write",

@@ -1,10 +1,6 @@
 import React, { Component } from "react";
-import {
-  ListProps,
-  ListState,
-  ListModifier,
-} from "../interface/List.interface";
-import ListUI from "../components/List";
+import { ListProps, ListState, ListModifier } from "./List.interface";
+import ListUI from "./List.component";
 
 export class List extends Component<ListProps, ListState> {
   constructor(props: ListProps) {

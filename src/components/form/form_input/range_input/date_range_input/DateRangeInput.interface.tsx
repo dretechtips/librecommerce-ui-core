@@ -1,9 +1,6 @@
-export interface DateRangeInputUIProps {
-  start?: Date;
-  end?: Date;
-  readOnly?: boolean;
-  onInput?: (e: DateRangeInputEvent) => void;
-}
+import { FormInputProps } from "../../FormInput.interface";
+
+export interface DateRangeInputProps extends FormInputProps<string[]> {}
 
 export type DateRangeInputEvent = {
   start: React.FormEvent<HTMLInputElement> | null;

@@ -1,19 +1,13 @@
 import React from "react";
 import { MainPanelProps } from "./MainPanel.interface";
-import { Switch, Route } from "react-router-dom";
 import "./MainPanel.scss";
-import SidePanel from "../side_panel/SidePanel.container";
-import { SidePanelContext } from "../side_panel/SidePanel.interface";
+import getScreenType from "src/utils/ScreenToSize";
+import Scenes from "src/components/scenes/Scenes.component";
 
 export default (props: MainPanelProps) => {
   function getMarginLeft(): number {
-    if (
-      props.browser === "mobile" ||
-      props.screen === "md" ||
-      props.screen === "sm" ||
-      props.screen === "xs"
-    )
-      return 0;
+    const screen = getScreenType();
+    if (screen === "md" || screen === "sm" || screen === "xs") return 0;
     else return props.marginLeft ? props.marginLeft : 0;
   }
   return (
@@ -24,11 +18,7 @@ export default (props: MainPanelProps) => {
       }}
       className="p-4 main-view"
     >
-      <Switch>
-        {props.routes.map((cur) => (
-          <Route exact path={cur.path} component={cur.component} />
-        ))}
-      </Switch>
+      <Scenes />
     </main>
   );
 };

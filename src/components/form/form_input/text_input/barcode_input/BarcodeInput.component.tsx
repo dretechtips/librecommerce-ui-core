@@ -1,34 +1,32 @@
 import React from "react";
 import {
-  BarcodeScannerUIProps,
-  BarcodeScannerType,
-} from "../interface/BarcodeScannerBox.interface";
-import Modal from "../components/Modal";
-import Alert from "../components/Alert";
-import Button from "./Button";
-import List from "../containers/List";
+  BarcodeInputUIProps,
+  BarcodeInputType,
+} from "./BarcodeInput.interface";
+import Modal from "src/components/modal/Modal.component";
+import Alert from "src/components/alert/Alert.component";
+import Button from "src/components/button/Button.component";
+import List from "src/components/list/List.container";
+import TextInput from "../TextInput.container";
 
-function BarcodeScannerBox(props: BarcodeScannerUIProps): JSX.Element {
-  const inputBoxEl: JSX.Element = (
-    <div className="input-group mb-2">
-      <input
-        {...(props as React.DetailedHTMLProps<
-          React.InputHTMLAttributes<HTMLInputElement>,
-          HTMLInputElement
-        >)}
-        type="text"
-        className="form-control"
-      />
-      <div className="input-group-append" onClick={() => props.start()}>
-        <span className="input-group-text">
-          <i className="fas fa-eye"></i>
-        </span>
-      </div>
-    </div>
+function BarcodeInput(props: BarcodeInputUIProps): JSX.Element {
+  const input: JSX.Element = (
+    <TextInput
+      {...props}
+      example="EAN/UPC/Code_128/Code_39/Code_93/Codabar/i2of5"
+      readOnly={true}
+      append={[
+        {
+          type: "button",
+          text: "SCAN",
+          action: props.start,
+        },
+      ]}
+    />
   );
   switch (props.mode) {
     case "standby" || "complete":
-      return inputBoxEl;
+      return input;
     case "error":
       return (
         <Modal
@@ -108,7 +106,7 @@ function BarcodeScannerBox(props: BarcodeScannerUIProps): JSX.Element {
                         name: "Select",
                         icon: "fas fa-check-circle",
                         func: (id) =>
-                          props.updateScanner(id as BarcodeScannerType),
+                          props.updateScanner(id as BarcodeInputType),
                       },
                     ],
                   }}
@@ -119,8 +117,8 @@ function BarcodeScannerBox(props: BarcodeScannerUIProps): JSX.Element {
         />
       );
     default:
-      return inputBoxEl;
+      return input;
   }
 }
 
-export default BarcodeScannerBox;
+export default BarcodeInput;

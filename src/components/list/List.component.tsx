@@ -1,13 +1,13 @@
 import React from "react";
-import { ListUIProps } from "../interface/List.interface";
-import Button from "./Button";
+import { ListUIProps } from "./List.interface";
+import Button from "src/components/button/Button.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle as fasCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { faCheckCircle as farCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { Manager, Reference, Popper } from "react-popper";
-import Popover from "./Popover";
-import { PopoverMenuItem } from "../interface/Popover.interface";
-import PopoverMenu from "./PopoverMenu";
+import Popover from "src/components/popover/Popover.component";
+import { PopoverMenuItem } from "src/components/popover/popover_menu/PopoverMenu.interface";
+import PopoverMenu from "src/components/popover/popover_menu/PopoverMenu.component";
 
 function List(props: ListUIProps) {
   switch (props.modifier) {

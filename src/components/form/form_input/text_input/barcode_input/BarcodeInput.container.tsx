@@ -1,21 +1,16 @@
 import React, { ComponentType, Component } from "react";
 import Quagga from "quagga";
-import Button from "";
-import { ButtonProps } from "../interface/Button.interface";
 import {
-  BarcodeScannerState,
-  BarcodeScannerProps,
-  BarcodeScannerType,
-} from "../interface/BarcodeScannerBox.interface";
-import BarcodeScannerBoxUI from "../components/BarcodeScannerBox";
+  BarcodeInputState,
+  BarcodeInputProps,
+  BarcodeInputType,
+} from "./BarcodeInput.interface";
+import BarcodeInputUI from "./BarcodeInput.component";
 
-class BarcodeScannerBox extends Component<
-  BarcodeScannerProps,
-  BarcodeScannerState
-> {
+class BarcodeInput extends Component<BarcodeInputProps, BarcodeInputState> {
   cameraView: HTMLDivElement | null;
   camera: HTMLVideoElement | null;
-  constructor(props: BarcodeScannerProps) {
+  constructor(props: BarcodeInputProps) {
     super(props);
     this.state = {
       mode: "standby",
@@ -42,6 +37,8 @@ class BarcodeScannerBox extends Component<
         return "codebar_reader";
       case "i2of5":
         return "i2of5_reader";
+      default:
+        throw new TypeError("Invalid Scan Type");
     }
   }
   start = () => {
@@ -91,7 +88,7 @@ class BarcodeScannerBox extends Component<
     else if (this.camera.webkitEnterFullScreen)
       this.camera.webkitEnterFullScreen();
   };
-  updateScanner = (id: BarcodeScannerType) => {
+  updateScanner = (id: BarcodeInputType) => {
     this.setState({ ...this.state, scanType: id, mode: "scanning" });
   };
   exit = () => {
@@ -103,7 +100,7 @@ class BarcodeScannerBox extends Component<
   }
   render() {
     return (
-      <BarcodeScannerBoxUI
+      <BarcodeInputUI
         {...this.props}
         updateScanner={this.updateScanner}
         cameraSetup={this.cameraSetup}
@@ -119,4 +116,4 @@ class BarcodeScannerBox extends Component<
   }
 }
 
-export default BarcodeScannerBox;
+export default BarcodeInput;

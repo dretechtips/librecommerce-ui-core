@@ -13,7 +13,7 @@ export class PhotoInput extends Component<PhotoInputProps, PhotoInputState> {
     };
     this.fileInputElement = null;
   }
-  readPhotosFile = (files: File[]) => {
+  public readPhotosFile = (files: File[]) => {
     const photos: File[] = files;
     this.setState({
       ...this.state,
@@ -25,7 +25,7 @@ export class PhotoInput extends Component<PhotoInputProps, PhotoInputState> {
       scanner.readAsDataURL(cur.slice(0, cur.size));
     });
   };
-  filesToPhoto = (e: ProgressEvent<FileReader>) => {
+  public filesToPhoto = (e: ProgressEvent<FileReader>) => {
     if (!e.target) return;
     if (typeof e.target!.result === "string") {
       if (
@@ -42,20 +42,20 @@ export class PhotoInput extends Component<PhotoInputProps, PhotoInputState> {
       });
     }
   };
-  setFileUpload = (ref: HTMLInputElement) => {
+  public setFileUpload = (ref: HTMLInputElement) => {
     this.fileInputElement = ref;
   };
-  toggleFileUpload = () => {
+  public toggleFileUpload = () => {
     if (!this.fileInputElement) return;
     else this.fileInputElement.click();
   };
-  setRemoved = (index: number) => {
+  public setRemoved = (index: number) => {
     this.state.photos.splice(index, 1);
     this.setState({ ...this.state, remove: index });
   };
-  getRemoved = () => this.state.remove;
-  clearRemoved = () => this.setState({ ...this.state, remove: -1 });
-  render() {
+  public getRemoved = () => this.state.remove;
+  public clearRemoved = () => this.setState({ ...this.state, remove: -1 });
+  public render() {
     return (
       <PhotoInputUI
         {...this.props}
@@ -75,4 +75,4 @@ export class PhotoInput extends Component<PhotoInputProps, PhotoInputState> {
   }
 }
 
-export default PhotoUpload;
+export default PhotoInput;

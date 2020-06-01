@@ -1,25 +1,10 @@
-import { FormModifier, FormQuestionProps } from "./Form.interface";
-import {
-  TextInputProps,
-  CheckboxInputProps,
-  TextAreaInputProps,
-  TextAreaListInputProps,
-  SelectInputProps,
-  DateInputProps,
-} from "./Input.interface";
-import { BarcodeScannerInputProps } from "./BarcodeScannerBox.interface";
-import { FileUploadInputProps } from "./FileUpload.interface";
-import { PhotoUploadInputProps } from "./PhotoUpload.interface";
-import { TagsBoxInputProps } from "./Tagsbox.interface";
-import { DateRangeInputProps } from "./DateRangeInput.interface";
-import { SliderInputProps } from "./Slider.interface";
-import { NoRequired } from "../utils/Types";
-
 export interface FormInputProps<
-  T extends string | number | boolean | string[]
+  T extends string | number | boolean | string[] | number[] | boolean[] | File[]
 > {
-  onChange: (value: T) => void;
-  isReady: (value: boolean) => void;
+  onChange?: (value: T) => void;
+  onValid?: (value: boolean) => void;
+  defaultValue: T;
+  readonly?: boolean;
 }
 
 // export type FormInputProps = {

@@ -3,10 +3,7 @@ import { FileInputUIProps } from "./FileInput.interface";
 
 function FileInput(props: FileInputUIProps) {
   return (
-    <div
-      {...props.input}
-      className={"custom-file " + (props.interface ? "d-none" : "")}
-    >
+    <div className={"custom-file " + (props.interface ? "d-none" : "")}>
       <input
         className="custom-file-input"
         type="file"

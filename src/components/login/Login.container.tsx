@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import LoginUI from "../components/Login";
-import { LoginProps, LoginState } from "../interface/Login.interface";
+import LoginUI from "./Login.component";
+import { LoginProps, LoginState } from "./Login.interface";
 
 export class Login extends Component<LoginProps, LoginState> {
   constructor(props: LoginProps) {
@@ -9,28 +9,22 @@ export class Login extends Component<LoginProps, LoginState> {
       failed: false,
     };
   }
-  login = (username: string, password: string) => {
+  public login = (username: string, password: string) => {
     // Make Http Request to Server
-    this.props.loginApp();
+    this.props.setLogin(!this.state.failed);
   };
-  render() {
-    if (this.state.failed) {
-      return (
-        <LoginUI
-          logoURL={this.props.logoURL}
-          login={this.login}
-          failed={true}
-        />
-      );
-    } else {
-      return (
-        <LoginUI
-          logoURL={this.props.logoURL}
-          login={this.login}
-          failed={false}
-        />
-      );
-    }
+
+  public base64(username: string, password: string) {
+    return btoa(username + ":" + password);
+  }
+  public render() {
+    return (
+      <LoginUI
+        logoPath={this.props.logoPath}
+        login={this.login}
+        failed={this.state.failed}
+      />
+    );
   }
 }
 

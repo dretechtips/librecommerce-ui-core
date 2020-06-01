@@ -1,5 +1,5 @@
 import React, { Component, RefObject } from "react";
-import { ModalProps } from "../interface/Modal.interface";
+import { ModalProps } from "./Modal.interface";
 
 function Modal(props: ModalProps) {
   return (

@@ -1,8 +1,7 @@
 export interface NavProps {
-  dashboardPath: string;
-  leftItems?: JSX.Element[];
-  rightItems?: JSX.Element[];
-  browser: "mobile" | "desktop";
+  presentation?: "tabs" | "pills";
+  alignment: "horizontal" | "vertical";
+  fill?: boolean;
+  // todo
+  children?: "todo";
 }
-
-export interface NavUIProps extends NavProps {}

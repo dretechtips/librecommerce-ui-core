@@ -1,15 +1,20 @@
 import React, { Component } from "react";
 import { DashboardProps, DashboardState } from "./Dashboard.interface";
 import DashboardUI from "./Dashboard.component";
+import App from "../app/App.container";
+import { AppNavGroup } from "../app/app_nav/AppNav.interface";
 
 class Dashboard extends Component<DashboardProps, DashboardState> {
+  static contextType: React.Context<DashboardState> = React.createContext(
+    undefined as any
+  );
+
   constructor(props: DashboardProps) {
     super(props);
     this.state = {
-      display: this.props.menu,
+      active: null,
       search: this.props.search ? this.props.search : "",
     };
-    Dashboard.contextType = React.createContext(this.search);
   }
   public componentDidMount() {
     if (this.props.search) {
@@ -17,17 +22,25 @@ class Dashboard extends Component<DashboardProps, DashboardState> {
     }
   }
 
+  public setActive = (value: number[]): void => {
+    this.setState({ ...this.state, active: value });
+  };
+
   public search = (value: string): void => {
-    const submenus = this.props.menu.submenus.filter((submenu) =>
-      new RegExp(value, "i").test(submenu.title)
-    );
     this.setState({
       ...this.state,
-      display: { ...this.props.menu, submenus: submenus },
+      search: value,
     });
   };
-  render() {
-    return <DashboardUI handleSearch={this.search} menu={this.state.display} />;
+  public render() {
+    return (
+      <DashboardUI
+        {...this.props}
+        search={this.state.search}
+        handleSearch={this.search}
+        setActive={this.setActive}
+      />
+    );
   }
 }
 

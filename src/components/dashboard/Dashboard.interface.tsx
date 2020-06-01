@@ -2,14 +2,15 @@ import { DashboardMenuProps } from "./dashboard_menu/DashboardMenu.interface";
 
 export interface DashboardProps {
   search?: string;
-  menu: DashboardMenuProps;
 }
 
 export interface DashboardUIProps extends DashboardProps {
+  search: string;
   handleSearch: (value: string) => void;
+  setActive: (value: number[]) => void;
 }
 
 export interface DashboardState {
   search: string;
-  display: DashboardMenuProps;
+  active: number[] | null;
 }

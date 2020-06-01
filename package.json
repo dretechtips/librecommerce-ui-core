@@ -1,5 +1,6 @@
 {
-  "name": "core",
+  "name": "@ecommerce/frontend_core",
+  "description": "Typescript-based React E-Commerce Core",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

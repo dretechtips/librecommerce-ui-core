@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import PhotoViewerUI from "../components/PhotoViewer";
-import {
-  PhotoViewerProps,
-  PhotoViewerState,
-} from "../interface/PhotoViewer.interface";
+import PhotoViewerUI from "./PhotoViewer.component";
+import { PhotoViewerProps, PhotoViewerState } from "./PhotoViewer.interface";
 
 export class PhotoViewer extends Component<PhotoViewerProps, PhotoViewerState> {
   constructor(props: PhotoViewerProps) {

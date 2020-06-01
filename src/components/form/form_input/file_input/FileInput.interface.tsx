@@ -1,15 +1,12 @@
-export interface FileInputProps {
+import { FormInputProps } from "../FormInput.interface";
+
+export interface FileInputProps extends FormInputProps<File[]> {
   /**
    * @description Limit is in terms of MB
    */
-  input?: React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >;
   limit?: number;
   message: string;
   allowedFileTypes?: string[];
-  onFilesSync?: (files: File[]) => void;
   interface?: FileInputAccess;
 }
 

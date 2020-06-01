@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import { TagsBoxProps, TagsBoxState } from "./Tagsbox.interface";
-import TagsBoxUI from "./TagsBox";
+import { TagsInputProps, TagsInputState } from "./TagsInput.interface";
+import TagsBoxUI from "./TagsInput.component";
 import { Tag } from "react-tag-input";
 
-export class TagsBox extends Component<TagsBoxProps, TagsBoxState> {
-  constructor(props: TagsBoxProps) {
+export class TagsBox extends Component<TagsInputProps, TagsInputState> {
+  constructor(props: TagsInputProps) {
     super(props);
     this.state = {
       tags: this.props.tags ? this.props.tags : [],
     };
   }
-  handleAdd = (tag: Tag): void => {
+  public handleAdd = (tag: Tag): void => {
     const length: number = this.state.tags.length;
     const lastTag: Tag | undefined = this.state.tags[length - 1];
     let nextID: number = 0;
@@ -18,21 +18,21 @@ export class TagsBox extends Component<TagsBoxProps, TagsBoxState> {
     tag.id = "" + nextID;
     this.setState({ ...this.state, tags: [...this.state.tags, tag] });
   };
-  handleDelete = (index: number): void => {
+  public handleDelete = (index: number): void => {
     const tags = this.state.tags;
     this.setState({
       ...this.state,
       tags: tags.filter((cur, i) => i !== index),
     });
   };
-  handleDrag = (tag: Tag, indexOfCur: number, indexOfNew: number): void => {
+  public handleDrag = (tag: Tag, curIndex: number, nextIndex: number): void => {
     const tags = this.state.tags;
     const nTags = tags.slice();
-    nTags.splice(indexOfCur, 1);
-    nTags.splice(indexOfNew, 0, tag);
+    nTags.splice(curIndex, 1);
+    nTags.splice(nextIndex, 0, tag);
     this.setState({ ...this.state, tags: nTags });
   };
-  render() {
+  public render() {
     console.log(this.state.tags);
     return (
       <TagsBoxUI

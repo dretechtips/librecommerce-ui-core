@@ -1,6 +1,6 @@
 import React from "react";
-import { LoginUIProps } from "../interface/Login.interface";
-import Alert from "../components/Alert";
+import { LoginUIProps } from "./Login.interface";
+import Alert from "src/components/alert/Alert.component";
 
 export default (props: LoginUIProps) => {
   const rUsername = React.createRef<HTMLInputElement>();
@@ -22,7 +22,7 @@ export default (props: LoginUIProps) => {
                 <div className="card-body text-center">
                   <img
                     width="128"
-                    src={props.logoURL}
+                    src={window.location.host + "/" + props.logoPath}
                     alt="Logo"
                     className="mb-3"
                   />

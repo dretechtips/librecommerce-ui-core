@@ -1,9 +1,7 @@
 import React from "react";
 import Checkbox from "./Checkbox.component";
+import { FormInputProps } from "../FormInput.interface";
 
-export type CheckboxUIProps = {
-  label?: string;
-} & React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->;
+export interface CheckboxProps extends FormInputProps<boolean> {
+  label: string;
+}

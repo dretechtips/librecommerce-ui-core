@@ -1,6 +1,9 @@
+import { ProfileProps } from "../profile/Profile.interface";
+
 export interface LoginProps {
-  logoURL: string;
-  loginApp: () => void;
+  loginPath: string;
+  logoPath: string;
+  setLogin: (value: boolean, profile?: ProfileProps) => void;
 }
 
 export interface LoginState {
@@ -8,7 +11,7 @@ export interface LoginState {
 }
 
 export interface LoginUIProps {
-  logoURL: string;
+  logoPath: string;
   failed: boolean;
   login: (username: string, password: string) => void;
 }

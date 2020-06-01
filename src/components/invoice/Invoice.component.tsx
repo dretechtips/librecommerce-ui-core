@@ -1,9 +1,9 @@
 import React from "react";
-import { InvoiceUIProps, InvoiceSendTo } from "../interface/Invoice.interface";
-import Card from "./Card";
-import App from "../containers/App";
-import Table from "../containers/Table";
-import Button from "./Button";
+import { InvoiceUIProps, InvoiceSendTo } from "./Invoice.interface";
+import Card from "src/components/card/Card.container";
+import App from "src/components/app/App.container";
+import Table from "src/components/table/Table.container";
+import Button from "src/components/button/Button.component";
 
 function Invoice(props: InvoiceUIProps) {
   return (

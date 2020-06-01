@@ -1,8 +1,8 @@
 import React from "react";
 import "./css/PhotoViewer.css";
-import { PhotoViewerUIProps } from "../interface/PhotoViewer.interface";
+import { PhotoViewerUIProps } from "./PhotoViewer.interface";
 import { Manager, Reference, Popper } from "react-popper";
-import Popover from "./Popover";
+import Popover from "src/components/popover/Popover.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 

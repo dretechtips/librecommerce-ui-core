@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import {
-  PaginationProps,
-  PaginationState,
-} from "../interface/Pagination.interface";
-import PaginationUI from "../components/Pagination";
+import { PaginationProps, PaginationState } from "./Pagination.interface";
+import PaginationUI from "./Pagination.component";
 
 export class Pagination extends Component<PaginationProps, PaginationState> {
   constructor(props: PaginationProps) {

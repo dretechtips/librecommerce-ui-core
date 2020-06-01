@@ -1,6 +1,6 @@
 import React from "react";
-import App from "../containers/App";
-import { ProfileProps } from "../interface/Profile.interface";
+import App from "src/components/app/App.container";
+import { ProfileProps } from "./Profile.interface";
 
 function Profile(props?: ProfileProps) {
   if (props)

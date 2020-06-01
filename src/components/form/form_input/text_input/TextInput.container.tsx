@@ -3,6 +3,7 @@ import {
   TextInputProps,
   TextInputState,
   TextInputMessage,
+  TextInputValidation,
 } from "./TextInput.interface";
 import TextInputUI from "./TextInput.component";
 
@@ -10,36 +11,54 @@ export class TextInput extends React.Component<TextInputProps, TextInputState> {
   constructor(props: TextInputProps) {
     super(props);
     this.state = {
-      messages: [],
+      validations: this.props.validations ? this.props.validations : [],
+      beenClicked: false,
     };
-    this.validation.bind(this);
+    this.validation = this.validation.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   public validation(value: string): void {
-    const validation: TextInputMessage[] = this.props.validations
-      ?.map((cur) => cur.handler(value))
-      .map((status, index) => {
-        return {
-          isValid: status,
-          message: status
-            ? this.props.validations[index].validMsg
-            : this.props.validations[index].invalidMsg,
-        };
-      });
-    if (validation) {
+    const validations: TextInputValidation[] = this.props.validations
+      ? this.props.validations
+          .map((cur) => cur.handler(value))
+          .map((status, index) => {
+            return {
+              ...(this.props.validations as TextInputValidation[])[index],
+              isValid: status,
+            };
+          })
+      : [];
+    if (validations) {
       this.setState({
         ...this.state,
-        messages: validation,
+        validations: validations,
       });
-      this.props.isReady(
-        validation.filter((cur) => cur.isValid).length ===
-          this.props.validations.length
-      );
+      if (
+        validations.filter((cur) => !cur.isValid).length === 0 &&
+        this.props.onValid
+      )
+        this.props.onValid(true);
     }
   }
 
+  public onClick() {
+    if (!this.state.beenClicked)
+      this.setState({
+        ...this.state,
+        beenClicked: true,
+      });
+  }
+
   public render() {
-    return <TextInputUI {...this.props} messages={this.state.messages} />;
+    return (
+      <TextInputUI
+        {...this.props}
+        validations={this.state.validations}
+        onClick={this.onClick}
+        beenClicked={this.state.beenClicked}
+      />
+    );
   }
 }
 

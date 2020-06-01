@@ -2,13 +2,17 @@ import { AxiosResponse } from "axios";
 import {
   FormInputs,
   FormInputConditional,
-} from "../interface/FormInput.interface";
-import { FormField } from "../components/FormField";
-import FormFieldGroup from "../components/FormFieldGroup";
-import { NoInfer } from "../utils/Types";
-import { FormFieldsProps } from "./FormFields.interface";
+} from "./form_input/FormInput.interface";
+import { FormField } from "./form_field/FormField.container";
+import FormFieldGroup from "./form_group/FormGroup.container";
+import { NoInfer } from "src/utils/types";
+import { FormFieldsProps } from "./form_field/FormField.container";
 
 export interface FormProps<T> {
+  /**
+   * Path
+   */
+  to: string;
   title: string;
   fields: Omit<FormFieldsProps<T>, "onInput">;
   submit?: (value: T) => Promise<AxiosResponse>;

@@ -1,79 +1,81 @@
 import React, { useState } from "react";
-import { InputUIProps, InputMessage, InputGroup } from "./TextInput.interface";
+import {
+  TextInputUIProps,
+  TextInputMessage,
+  TextInputAddon,
+} from "./TextInput.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import Button from "src/components/button/Button.component";
 
 /**
  *
  * @param props Input Props
  * @typedef T Invalid State
  */
-function Input<T extends {}>(props: InputUIProps<T>) {
-  const [display, setDisplay] = useState(false);
-  const [clicked, setClicked] = useState(false);
+function TextInput(props: TextInputUIProps) {
+  function isValid(): boolean {
+    if (!props.validations) return true;
+    return props.validations.filter((cur) => !cur.isValid).length === 0;
+  }
+
+  function addons(addons: TextInputAddon[]) {
+    return addons.map((cur) =>
+      cur.type === "button" ? (
+        <Button value={cur.text} action={cur.action} color="primary" />
+      ) : (
+        <span className="input-group-text">{cur.text}</span>
+      )
+    );
+  }
   return (
     <div>
       <div className="input-group">
+        {props.prepend && (
+          <div className="input-group-prepend">{addons(props.prepend)}</div>
+        )}
         <input
-          readOnly={props.readOnly}
+          readOnly={props.readonly}
           type="text"
           className={
             "form-control " +
-            (clicked === true
-              ? props.valid.length === 0
-                ? "is-valid"
-                : "is-invalid"
-              : "")
+            (props.beenClicked ? (isValid() ? "is-valid" : "is-invalid") : "")
           }
-          onChange={props.verify}
-          value={props.value}
-          onFocus={() => setDisplay(true)}
-          onBlur={() => setDisplay(false)}
-          onClick={() => setClicked(true)}
-          onInput={props.onInput}
+          onChange={(event) => props.onChange?.(event.target.value)}
+          value={props.defaultValue}
           placeholder={props.example}
         />
-        <div className="input-group-append">
-          {props.buttons &&
-            props.buttons.map((props) => (
-              <button className="input-group-text" onClick={props.action}>
-                {props.icon && <i className={props.icon}></i>}
-                {props.value}
-              </button>
-            ))}
-        </div>
+        {props.append && (
+          <div className="input-group-append">{addons(props.append)}</div>
+        )}
       </div>
-      {display && (
+      {props.beenClicked && (
         <div className="text-sm">
-          {props.valid.length === 0 ? (
+          {isValid() ? (
             <span className="text-success">
-              Client has successfully verify this {props.name.toLowerCase()}!
+              Client has successfully verify this field!
             </span>
           ) : (
             <React.Fragment>
-              {Object.keys(props.invalid).map((key) => {
-                const cur: InputMessage = props.invalid[key as keyof T];
-                if (props.valid.indexOf(key as keyof T) !== -1)
-                  return (
-                    <React.Fragment>
-                      <span className="text-danger">
-                        <FontAwesomeIcon icon={faCheck} fixedWidth />
-                        {cur.fail}
-                      </span>
-                      <br />
-                    </React.Fragment>
-                  );
-                else
-                  return (
-                    <React.Fragment>
-                      <span className="text-success">
-                        <FontAwesomeIcon icon={faTimes} fixedWidth />
-                        {cur.success}
-                      </span>
-                      <br />
-                    </React.Fragment>
-                  );
-              })}
+              {props.validations?.map((cur) =>
+                cur.isValid ? (
+                  <React.Fragment>
+                    <span className="text-danger">
+                      <FontAwesomeIcon icon={faCheck} fixedWidth />
+                      {cur.message.success}
+                    </span>
+                    <br />
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>
+                    <span className="text-success">
+                      <FontAwesomeIcon icon={faTimes} fixedWidth />
+                      {cur.message.fail}
+                    </span>
+                    <br />
+                  </React.Fragment>
+                )
+              )}
             </React.Fragment>
           )}
         </div>
@@ -82,4 +84,4 @@ function Input<T extends {}>(props: InputUIProps<T>) {
   );
 }
 
-export default Input;
+export default TextInput;

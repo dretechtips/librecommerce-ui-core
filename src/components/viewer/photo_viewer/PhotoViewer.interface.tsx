@@ -9,7 +9,10 @@ export interface PhotoViewerUIProps extends PhotoViewerProps {
 }
 
 export interface PhotoViewerProps {
-  photos: HTMLImageElement[];
+  /**
+   * HTML Photo || Photo URL
+   */
+  photos: (HTMLImageElement | string)[];
   add?: () => void;
   remove?: (index: number) => void;
 }

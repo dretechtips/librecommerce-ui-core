@@ -1,5 +1,6 @@
-export interface SelectionInputProps {
-  defaultIndex: number;
+import { FormInputProps } from "../FormInput.interface";
+
+export interface SelectionInputProps extends FormInputProps<string | number> {
   options: SelectionOption[];
   sendAs: SelectionSend;
 }

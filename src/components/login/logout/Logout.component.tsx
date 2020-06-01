@@ -1,11 +1,16 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useContext } from "react";
+import App from "src/components/app/App.container";
+import { LogoutProps } from "./Logout.interface";
 
-function Logout() {
-  const history = useHistory();
-  history.push("/");
-  window.location.reload();
-  return <div></div>;
+function Logout(props: LogoutProps) {
+  return (
+    <App.contextType.Consumer>
+      {(value) => {
+        value.setLogin(false);
+        return props.children;
+      }}
+    </App.contextType.Consumer>
+  );
 }
 
 export default Logout;

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import InvoiceUI from "../components/Invoice";
+import InvoiceUI from "./Invoice.component";
 import {
   InvoiceProps,
   InvoiceState,
   InvoiceGoodorService,
-} from "../interface/Invoice.interface";
+} from "./Invoice.interface";
 
 export class Invoice extends Component<InvoiceProps, InvoiceState> {
   constructor(props: InvoiceProps) {

@@ -3,6 +3,11 @@ import { WithContext as ReactTags } from "react-tag-input";
 import { TagsInputUIProps } from "./TagsInput.interface";
 
 function TagsInput(props: TagsInputUIProps) {
+  function onChange(value: string) {
+    props.onChange?.(value.split(","));
+    props.onValid?.(true);
+  }
+
   return (
     <ReactTags
       classNames={{
@@ -13,6 +18,7 @@ function TagsInput(props: TagsInputUIProps) {
         remove: "ml-2",
       }}
       tags={props.tags}
+      handleInputChange={onChange}
       handleDelete={props.handleDelete}
       handleDrag={props.handleDrag}
       handleAddition={props.handleAdd}
@@ -20,4 +26,4 @@ function TagsInput(props: TagsInputUIProps) {
   );
 }
 
-export default TagsBox;
+export default TagsInput;

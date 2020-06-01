@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import FormUI from "../components/Form";
+import FormUI from "./Form.component";
 import {
   FormProps,
   FormState,
   FormRelation,
   FormCleared,
-} from "../interface/Form.interface";
-import { Loading } from "../components/Loading";
-import { Tree, Leaf, Branch } from "../data/Tree";
-import FormField from "../components/FormField";
-import FormFieldGroup from "../components/FormFieldGroup";
+} from "./Form.interface";
+import { Loading } from "src/components/loading/Loading.component";
+import { Tree, Leaf, Branch } from "src/data/Tree";
+import FormField from "./form_field/FormField.container";
+import FormFieldGroup from "./form_group/FormGroup.container";
 
 /**
  * @todo Fix the brokne inital state of nested form objects

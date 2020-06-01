@@ -1,30 +1,24 @@
-import { ScreenType } from "../utils/ScreenToSize";
+import { ScreenType } from "src/utils/ScreenToSize";
 
 export interface SidePanelProps {
-  items: SidePanelItem[];
-  dashboardPath: string;
   top?: number;
   screen: ScreenType;
 }
 
 export interface SidePanelUIProps extends SidePanelProps {
-  toDashboard: (index: number, name: string, search: Function) => void;
+  setActive: (value: number) => void;
   active: number;
   slide: SlideProps;
-  open: boolean;
-  toggle: () => void;
+  isOpen: boolean;
+  toggleOpen: () => void;
 }
 
 export interface SidePanelState {
   active: number;
   isSliding: boolean;
   position: number;
-  open: boolean;
-}
-
-export interface SidePanelContext {
-  isOpen(): boolean;
-  toggle(): void;
+  isOpen: boolean;
+  toggleOpen: () => void;
 }
 
 export interface SlideProps {
@@ -37,4 +31,5 @@ export interface SlideProps {
 export interface SidePanelItem {
   name: string;
   icon: string;
+  path: string;
 }

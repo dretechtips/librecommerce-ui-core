@@ -1,8 +1,8 @@
 import React from "react";
-import FileInput from "../file_input/FileInput.container";
+import FileInput from "../FileInput.container";
 import { PhotoInputUIProps } from "./PhotoInput.interface";
-import PhotoViewer from "../../../viewer/photo_viewer/PhotoViewer.container";
-import { FileInputProps } from "../file_input/FileInput.interface";
+import PhotoViewer from "../../../../viewer/photo_viewer/PhotoViewer.container";
+import { FileInputProps } from "../FileInput.interface";
 
 function PhotoInput(props: PhotoInputUIProps) {
   return (
@@ -13,7 +13,7 @@ function PhotoInput(props: PhotoInputUIProps) {
         remove={props.fileInput.remove.set}
       />
       <FileInput
-        input={props.input}
+        {...props}
         message="Please upload pictures"
         allowedFileTypes={[
           "image/png",
@@ -22,11 +22,10 @@ function PhotoInput(props: PhotoInputUIProps) {
           "image/tiff",
           "image/bmp",
         ]}
-        onFilesSync={props.setPhotos}
         interface={props.fileInput}
       />
     </div>
   );
 }
 
-export default PhotoUpload;
+export default PhotoInput;

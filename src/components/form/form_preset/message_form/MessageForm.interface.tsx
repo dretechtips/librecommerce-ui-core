@@ -1,9 +1,6 @@
-import { AccountData } from "./routes/Account.interface";
-import { FormRelation } from "./Form.interface";
+import { FormRelation } from "../Form.interface";
 
-export interface MessageFormProps {
-  getAccounts: () => Promise<AccountData[]>;
-}
+export interface MessageFormProps {}
 
 export interface MessageFormUIProps extends MessageFormProps {
   subject: string;

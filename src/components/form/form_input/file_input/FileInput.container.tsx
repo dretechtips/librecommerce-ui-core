@@ -11,7 +11,7 @@ export class FileUpload extends Component<FileInputProps, FileInputState> {
       size: 0,
     };
   }
-  syncFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
+  public syncFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     if (
       this.props.allowedFileTypes &&
@@ -38,12 +38,12 @@ export class FileUpload extends Component<FileInputProps, FileInputState> {
         files[0].size ? files[0].size : 0
       ),
     });
-    if (this.props.onFilesSync) this.props.onFilesSync(files);
+    this.onChange?.(this.state.files);
     e.target.type = "text";
     e.target.type = "file";
   };
 
-  generateMessage = (): string => {
+  public generateMessage = (): string => {
     let message = "";
     this.state.files.forEach(
       (cur) => (message += cur.name + `[${cur.size / 1000000}MB], `)
@@ -52,14 +52,20 @@ export class FileUpload extends Component<FileInputProps, FileInputState> {
       return "It seems like no file has been inputted. Please try again.";
     else return message;
   };
-  componentWillUpdate(nextProps: FileInputProps, nextState: FileInputState) {
+  public componentWillUpdate(
+    nextProps: FileInputProps,
+    nextState: FileInputState
+  ) {
     if (
       nextState.size > (this.props.limit ? this.props.limit : Number.MAX_VALUE)
     ) {
       this.componentDidCatch(new Error("The uploaded file size to large!"));
     }
   }
-  componentDidUpdate(nextProps: FileInputProps, nextState: FileInputState) {
+  public componentDidUpdate(
+    nextProps: FileInputProps,
+    nextState: FileInputState
+  ) {
     if (this.state.message !== this.generateMessage())
       this.setState({ ...this.state, message: this.generateMessage() });
     if (this.props.interface)
@@ -69,22 +75,29 @@ export class FileUpload extends Component<FileInputProps, FileInputState> {
         this.props.interface.remove.clear();
       }
   }
-  componentDidCatch(e: Error) {
+  public componentDidCatch(e: Error) {
     this.state.files.pop();
     this.setState({
       ...this.state,
       size: this.state.files.reduce<number>((a, b) => a + b.size, 0),
       message: this.generateMessage(),
     });
-    if (this.props.onFilesSync) this.props.onFilesSync(this.state.files);
+    this.onChange?.(this.state.files);
     alert(e.message);
   }
-  render() {
+
+  public onChange = (files: File[]) => {
+    this.props.onChange?.(files);
+    this.props.onValid?.(true);
+  };
+
+  public render(): JSX.Element {
     return (
       <FileUploadUI
         {...this.props}
         message={this.state.message}
         syncFiles={this.syncFiles}
+        onChange={this.onChange}
       />
     );
   }

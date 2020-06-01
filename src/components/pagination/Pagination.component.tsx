@@ -1,5 +1,5 @@
 import React from "react";
-import { PaginationUIProps } from "../interface/Pagination.interface";
+import { PaginationUIProps } from "./Pagination.interface";
 
 function Pagination(props: PaginationUIProps) {
   return (

@@ -1,41 +1,68 @@
 import React, { Component } from "react";
 import { AppState, AppProps } from "./App.interface";
 import AppUI from "./App.component";
+import { AppNavGroup } from "./app_nav/AppNav.interface";
+import { ProfileProps } from "../profile/Profile.interface";
 
 export class App extends Component<AppProps, AppState> {
-  static defaultState: AppState = {
-    login: false,
-    profile: {
-      username: "Loading...",
-      name: "Loading...",
-      imageURL: "https://via.placeholder.com/40x40",
-    },
-    logoURL: "localhost",
-  };
-  public static contextType = React.createContext<AppState>(App.defaultState);
+  public static contextType: React.Context<AppState> = React.createContext(
+    undefined as any
+  );
   public constructor(props: AppProps) {
     super(props);
     this.state = {
-      ...App.defaultState,
-      logoURL: this.props.logoURL,
-    };
-    App.contextType = React.createContext(this.state);
-  }
-  public login = (): void => {
-    const nextState: AppState = {
-      ...this.state,
-      login: true,
+      login: false,
+      setLogin: this.setLogin,
+      logoURL: window.location.host + "/" + this.props.logoPath,
       profile: {
-        username: "johndoe1",
-        name: "John Doe",
-        imageURL: this.state.profile.imageURL,
+        name: "Name",
+        username: "Username",
+        imageURL: "https://via.placeholder.com/30x30",
       },
+      navigation: this.getNavigation(),
+      path: window.location.pathname,
+      setPath: this.setPath,
     };
-    this.setState(nextState);
-    App.contextType = React.createContext(nextState);
+  }
+
+  public getNavigation = (): AppNavGroup[] => {
+    return this.props.navigation.map((nav) => {
+      return {
+        ...nav,
+        items: nav.items?.map((item) => {
+          return {
+            ...item,
+            path: nav.basePath + item.path,
+          };
+        }),
+      };
+    });
   };
+
+  public setLogin = (value: boolean, profile?: ProfileProps): void => {
+    if(value)
+      this.props.onLogin();
+    this.setState({
+      ...this.state,
+      login: value,
+      profile: profile ? profile : this.state.profile,
+    });
+  };
+
+  public setPath = (value: string): void => {
+    this.setState({ ...this.state, path: value });
+  };
+
   render() {
-    return <AppUI {...this.props} login={this.state.login} />;
+    return (
+      <App.contextType.Provider value={this.state}>
+        <AppUI
+          {...this.props}
+          login={this.state.login}
+          setLogin={this.state.setLogin}
+        />
+      </App.contextType.Provider>
+    );
   }
 }
 

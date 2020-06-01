@@ -1,10 +1,7 @@
-import { FileInputAccess } from "../file_input/FileInput.interface";
+import { FileInputAccess } from "../FileInput.interface";
+import { FormInputProps } from "../../FormInput.interface";
 
-export interface PhotoInputProps {
-  input?: React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >;
+export interface PhotoInputProps extends FormInputProps<File[]> {
   photos?: HTMLImageElement[];
   photoLimit?: number;
   /** @description In terms of MB */

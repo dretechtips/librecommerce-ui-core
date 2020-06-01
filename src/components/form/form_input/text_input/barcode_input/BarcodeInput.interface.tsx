@@ -1,18 +1,16 @@
-export interface BarcodeScannerState {
-  mode: BarcodeScannerMode;
+import { TextInputProps } from "../TextInput.interface";
+
+export interface BarcodeInputState {
+  mode: BarcodeInputMode;
   value: string;
   error: Error | null;
-  scanType: BarcodeScannerType;
+  scanType: BarcodeInputType;
 }
 
-export interface BarcodeScannerProps
-  extends React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {}
+export interface BarcodeInputProps extends TextInputProps {}
 
-export interface BarcodeScannerUIProps extends BarcodeScannerProps {
-  mode: BarcodeScannerMode;
+export interface BarcodeInputUIProps extends BarcodeInputProps {
+  mode: BarcodeInputMode;
   value: string;
   start: () => void;
   init: (ref: HTMLDivElement | null) => void;
@@ -20,17 +18,17 @@ export interface BarcodeScannerUIProps extends BarcodeScannerProps {
   fullscreen: () => void;
   error: Error | null;
   cameraSetup: (ref: HTMLVideoElement | null) => void;
-  updateScanner: (id: BarcodeScannerType) => void;
+  updateScanner: (id: BarcodeInputType) => void;
 }
 
-export type BarcodeScannerMode =
+export type BarcodeInputMode =
   | "scanning"
   | "complete"
   | "standby"
   | "error"
   | "selecting";
 
-export type BarcodeScannerType =
+export type BarcodeInputType =
   | "code_128"
   | "ean"
   | "code_39"
