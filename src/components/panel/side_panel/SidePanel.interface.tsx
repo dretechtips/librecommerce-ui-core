@@ -1,8 +1,11 @@
 import { ScreenType } from "src/utils/ScreenToSize";
+import { AppNavGroup } from "src/components/app/app_nav/AppNav.interface";
 
 export interface SidePanelProps {
   top?: number;
   screen: ScreenType;
+  logoURL: string;
+  navigation: AppNavGroup[];
 }
 
 export interface SidePanelUIProps extends SidePanelProps {

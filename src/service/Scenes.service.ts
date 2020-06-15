@@ -4,6 +4,7 @@ export interface Scene {
 }
 
 export class ScenesService {
+  public static readonly default = new ScenesService();
 
   private scenes: Scene[];
 
@@ -17,8 +18,6 @@ export class ScenesService {
   public setFooter(footer: JSX.Element) {
     this.footer = footer;
   }
-
-  
 
   public add(scene: Scene) {
     this.scenes.push(scene);

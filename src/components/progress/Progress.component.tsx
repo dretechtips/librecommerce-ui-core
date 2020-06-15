@@ -1,3 +1,4 @@
+import React from "react";
 import { ProgressProps } from "./Progress.interface";
 import Progressbar from "./progressbar/Progressbar.component";
 

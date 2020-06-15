@@ -1,3 +1,7 @@
-import { DefaultNavbarProps } from "src/components/nav/navbar/navbar_preset/default_navbar/DefaultNavbar.interface";
+import { ProfileProps } from "src/components/profile/Profile.interface";
 
-export interface NavPanelProps extends DefaultNavbarProps {}
+export interface NavPanelProps {
+  logoURL: string;
+  profile: ProfileProps
+  sideToggle: () => void;
+}

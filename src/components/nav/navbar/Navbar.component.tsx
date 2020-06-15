@@ -13,32 +13,6 @@ export function Navbar(props: NavbarProps) {
       }}
       className="w-100 navbar navbar-expand navbar-light bg-light border-bottom border-success position-fixed"
     >
-      <App.contextType.Consumer>
-        {(app) => (
-          <SidePanel.contextType.Consumer>
-            {(sidePanel) => (
-              <React.Fragment>
-                <div onClick={sidePanel.toggle} data-toggle="modal">
-                  <i className="fas fa-bars text-success fa-fw fa-2x"></i>
-                </div>
-                <button
-                  className="navbar-toggler"
-                  data-toggle="collapse"
-                  data-target="navbarPanel"
-                >
-                  <span className="navbar-toggler-icon"></span>
-                </button>
-                <img
-                  src={app.logoURL}
-                  alt="Logo"
-                  className="ml-3"
-                  width="40px"
-                />
-              </React.Fragment>
-            )}
-          </SidePanel.contextType.Consumer>
-        )}
-      </App.contextType.Consumer>
       <div className="collapse navbar-collapse" id="navbarPanel">
         <ul className="navbar-nav mr-auto">
           {props.leftItems

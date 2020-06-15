@@ -1,3 +1,4 @@
+import React from "react";
 import { DashboardSearchProp } from "./DashboardSearch.interface";
 import Searchbar from "../../search/searchbar/Searchbar.component";
 

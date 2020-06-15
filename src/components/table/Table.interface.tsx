@@ -1,6 +1,6 @@
-import Button from "../components/Button";
+import Button from "src/components/button/Button.component";
 import React, { MutableRefObject } from "react";
-import { ModalAction } from "./Modal.interface";
+import { ModalAction } from "src/components/modal/Modal.interface";
 
 export interface TableProps {
   head: string[];

@@ -1,1 +1,3 @@
-export function withAPI(path: string): string {}
+export function withAPI(path: string): string {
+  throw new Error("No Implementation");
+}

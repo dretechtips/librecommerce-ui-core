@@ -5,10 +5,12 @@ export class HttpService<T extends { [K in keyof T]: string }> {
 
   constructor() {}
 
-  public async getWithAPI(path: string): Promise<AxiosResponse<any>> {}
+  public async getWithAPI(path: string): Promise<AxiosResponse<any>> {
+    throw new Error("No Implementation");
+  }
 
   public async get(url: string): Promise<AxiosResponse<any>> {
-    const res = await axios.get(url);
+    throw new Error("No Implementation");
   }
 
   public post() {}

@@ -1,3 +1,4 @@
+import React from "react";
 import { ProgressbarProps, ProgressbarUIProps } from "./Progressbar.interface";
 
 function Progressbar(props: ProgressbarUIProps) {

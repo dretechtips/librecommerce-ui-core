@@ -1,6 +1,6 @@
 import React from "react";
 import { InvoiceUIProps, InvoiceSendTo } from "./Invoice.interface";
-import Card from "src/components/card/Card.container";
+import Card from "src/components/card/Card.component";
 import App from "src/components/app/App.container";
 import Table from "src/components/table/Table.container";
 import Button from "src/components/button/Button.component";

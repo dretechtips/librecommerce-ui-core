@@ -15,7 +15,7 @@ export function DashboardMenu(props: DashboardMenuProps): JSX.Element {
               <Card title={cur.title} theme="success">
                 <div className="row">
                   {cur.items
-                    .sort((a, b) => a.name.localeCompare(b.name))
+                    ?.sort((a, b) => a.name.localeCompare(b.name))
                     .map((icon) => (
                       <DashboardIcon {...icon} />
                     ))}

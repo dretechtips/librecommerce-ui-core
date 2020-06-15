@@ -1,9 +1,9 @@
 import React, { MutableRefObject, useRef } from "react";
-import { TableUIProps, TableAdd } from "../interface/Table.interface";
-import Modal from "./Modal";
-import Button from "./Button";
-import Searchbar from "./Searchbar";
-import List from "../containers/List";
+import { TableUIProps, TableAdd } from "./Table.interface";
+import Modal from "src/components/modal/Modal.component";
+import Button from "src/components/button/Button.component";
+import Searchbar from "src/components/search/searchbar/Searchbar.component";
+import List from "src/components/list/List.container";
 
 function Table(props: TableUIProps) {
   return (
@@ -16,7 +16,7 @@ function Table(props: TableUIProps) {
                 value="Add an Item"
                 icon="fas fa-plus"
                 color="primary"
-                action={() => props.add!.toggle()}
+                action={() => props.add?.toggle()}
                 size="sm"
               />
             )}
@@ -27,7 +27,7 @@ function Table(props: TableUIProps) {
                   value={"Delete Items"}
                   icon={"fas fa-trash"}
                   color="primary"
-                  action={() => props.delete!.execute()}
+                  action={() => props.delete?.execute()}
                   size="sm"
                 />
               )}

@@ -1,5 +1,5 @@
 import React from "react";
-import { SearchbarProps } from "../interface/Searchbar.interface";
+import { SearchbarProps } from "./Searchbar.interface";
 
 export function Searchbar(props: SearchbarProps): JSX.Element {
   const ref: React.RefObject<HTMLInputElement> = React.createRef();

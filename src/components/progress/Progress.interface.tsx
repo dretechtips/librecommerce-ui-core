@@ -1,7 +1,6 @@
 import { ProgressbarProps } from "./progressbar/Progressbar.interface";
 
 export interface ProgressProps {
-  handleBars(index: number, barVal: number);
   bars: ProgressbarProps[];
   total: number;
   prefix?: string;

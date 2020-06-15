@@ -11,34 +11,46 @@ export class PhotoViewer extends Component<PhotoViewerProps, PhotoViewerState> {
         xPercent: 0,
         yPercent: 0,
       },
-      imageRects: this.props.photos.map((cur) => cur.getBoundingClientRect()),
+      imageRects: this.getPhotos().map((cur) => cur.getBoundingClientRect()),
       lastScrollTime: null,
     };
   }
-  componentWillReceiveProps(nextProps: PhotoViewerProps) {
+
+  public getPhotos(): HTMLImageElement[] {
+    return this.props.photos.map((cur) =>
+      typeof cur === "string"
+        ? ({
+            ...new HTMLImageElement(),
+            src: cur,
+          } as HTMLImageElement)
+        : cur
+    );
+  }
+
+  public componentWillReceiveProps(nextProps: PhotoViewerProps) {
     this.setState({
       ...this.state,
       imageRects: nextProps.photos.map((cur) => null),
     });
   }
-  setPhotosRect = (image: HTMLImageElement | null, index: number) => {
+  public setPhotosRect = (image: HTMLImageElement | null, index: number) => {
     if (image) {
       this.state.imageRects[index] = image.getBoundingClientRect();
     }
   };
-  displaySelected = (index: number) => {
+  public displaySelected = (index: number) => {
     this.setState({
       ...this.state,
       selected: { ...this.state.selected, index },
     });
   };
-  clearSelected = () => {
+  public clearSelected = () => {
     this.setState({
       ...this.state,
       selected: { ...this.state.selected, index: -1 },
     });
   };
-  zoomSelected = (
+  public zoomSelected = (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,
     index: number
   ) => {
@@ -64,24 +76,22 @@ export class PhotoViewer extends Component<PhotoViewerProps, PhotoViewerState> {
       });
     }
   };
-  render() {
+  public render() {
     return (
-      <div>
-        <PhotoViewerUI
-          remove={this.props.remove}
-          add={this.props.add}
-          photos={this.props.photos}
-          select={{
-            clear: this.clearSelected,
-            toggle: this.displaySelected,
-            selected: this.state.selected.index,
-            zoom: this.zoomSelected,
-            set: this.setPhotosRect,
-            xPercent: this.state.selected.xPercent,
-            yPercent: this.state.selected.yPercent,
-          }}
-        />
-      </div>
+      <PhotoViewerUI
+        remove={this.props.remove}
+        add={this.props.add}
+        photos={this.getPhotos()}
+        select={{
+          clear: this.clearSelected,
+          toggle: this.displaySelected,
+          selected: this.state.selected.index,
+          zoom: this.zoomSelected,
+          set: this.setPhotosRect,
+          xPercent: this.state.selected.xPercent,
+          yPercent: this.state.selected.yPercent,
+        }}
+      />
     );
   }
 }

@@ -52,7 +52,6 @@
     ]
   },
   "devDependencies": {
-    "gulp": "^4.0.2",
     "typescript": "^3.9.3"
   }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { QueueUIProps } from "./Queue.interface";
-import Card from "../card/Card.container";
+import Card from "../card/Card.component";
 import List from "../list/List.container";
 
 function Queue(props: QueueUIProps) {

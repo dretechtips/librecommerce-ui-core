@@ -1,5 +1,4 @@
 import React from "react";
-import AsyncNavDropdown from "src/components/nav/nav_dropdown/async_nav_dropdown/AsyncNavDropdown.container";
 import { CartProps } from "../Cart.interface";
 import Cart from "../Cart.component";
 import { HttpService } from "src/service/Http.service";

@@ -5,6 +5,7 @@ export interface PhotoViewerState {
 }
 
 export interface PhotoViewerUIProps extends PhotoViewerProps {
+  photos: HTMLImageElement[];
   select: PhotoViewerSelect;
 }
 

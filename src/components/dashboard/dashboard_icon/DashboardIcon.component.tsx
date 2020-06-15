@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { DashboardIconProps } from "./DashboardIcon.interface";
+import { AppNavItem } from "src/components/app/app_nav/AppNav.interface";
 
-function DashboardIcon(props: DashboardIconProps) {
+function DashboardIcon(props: AppNavItem) {
   return (
     <Link to={props.path} className="text-secondary col-6 col-sm-4 col-lg-3">
       <div className="p-3 text-center">
