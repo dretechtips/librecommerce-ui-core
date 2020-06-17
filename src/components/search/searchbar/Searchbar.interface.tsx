@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { ButtonProps } from "./Button.interface";
+import { ButtonProps } from "src/components/button/Button.interface";
 
 export interface SearchbarProps {
   placeholder: string;

@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/PhotoViewer.css";
+import "./PhotoViewer.scss";
 import { PhotoViewerUIProps } from "./PhotoViewer.interface";
 import { Manager, Reference, Popper } from "react-popper";
 import Popover from "src/components/popover/Popover.component";

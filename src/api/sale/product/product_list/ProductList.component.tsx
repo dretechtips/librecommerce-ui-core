@@ -1,5 +1,5 @@
 import React from "react";
-import { ProductListProps } from "./ProductList.inteface";
+import { ProductListProps } from "./ProductList.interface";
 import { Loading } from "src/components/loading/Loading.component";
 import { HttpService } from "src/service/Http.service";
 import { ProductDOT } from "../Product.interface";

@@ -1,14 +1,6 @@
 import React, { Component, MutableRefObject } from "react";
-import TableUI from "../components/Table";
-import {
-  TableState,
-  TableProps,
-  TableItem,
-} from "../interface/Table.interface";
-import Modal from "../components/Modal";
-import { Searchbar } from "../components/Searchbar";
-import List from "../containers/List";
-import Button from "../components/Button";
+import TableUI from "src/components/table/Table.component";
+import { TableState, TableProps, TableItem } from "./Table.interface";
 
 export class Table extends Component<TableProps, TableState> {
   constructor(props: TableProps) {

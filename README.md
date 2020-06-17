@@ -14,6 +14,19 @@ Contains all the
 
 ```
 npm install @ruff_tiger/react_core
+
+```
+
+## How to compile
+
+```
+npm run build
+```
+
+## How to watch
+
+```
+npm run watch
 ```
 
 ## Guideline

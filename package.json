@@ -27,12 +27,12 @@
     "react-scripts": "^3.4.1",
     "react-tag-input": "^6.4.2",
     "rfdc": "^1.1.4",
+    "ts-loader": "^7.0.5",
     "uuid": "^8.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "startOnHttps": "set HTTPS=true&&react-scripts start",
-    "build": "react-scripts build",
+    "build": "webpack --config webpack.config.js",
+    "watch": "webpack --config webpack.config.js --watch",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -52,6 +52,11 @@
     ]
   },
   "devDependencies": {
-    "typescript": "^3.9.3"
+    "css-loader": "^3.6.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^8.0.2",
+    "typescript": "^3.9.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   }
 }

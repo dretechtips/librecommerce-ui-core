@@ -1,6 +1,6 @@
 import { NavbarProps } from "./Navbar.interface";
 import React from "react";
-import SidePanel from "src/components/panel/side_panel/SidePanel.container";
+import SidePanel from "src/components/panels/side_panel/SidePanel.container";
 import App from "src/components/app/App.container";
 
 export function Navbar(props: NavbarProps) {
