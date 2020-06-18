@@ -1,7 +1,7 @@
-export * from "./Bootstrap";
-export * from "./Elements";
-export * from "./ScreenToSize";
-export * from "./StaticImplement";
-export * from "./StringUtil";
-export * from "./Types";
-export * from "./URL";
+export * as Bootstrap from "./Bootstrap";
+export * as Elements from "./Elements";
+export * as ScreenToSize from "./ScreenToSize";
+export * as StaticImplement from "./StaticImplement";
+export * as StringUtil from "./StringUtil";
+export * as Types from "./Types";
+export * as URL from "./URL";

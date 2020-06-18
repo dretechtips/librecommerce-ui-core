@@ -7,7 +7,7 @@ export * from "./carousel";
 export * from "./dashboard";
 export * from "./directory";
 export * from "./dropdown";
-// export * from "./form"
+export * from "./form";
 export * from "./invoice";
 export * from "./list";
 export * from "./loading";
