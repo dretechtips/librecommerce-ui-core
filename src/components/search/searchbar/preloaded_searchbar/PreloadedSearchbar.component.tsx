@@ -1,7 +1,7 @@
 import React from "react";
-import List from "../containers/List";
-import Searchbar from "./Searchbar";
-import { PreloadedSearchUIProps } from "../interface/PreloadedSearch.interface";
+import List from "src/components/list/List.container";
+import Searchbar from "src/components/search/searchbar/Searchbar.component";
+import { PreloadedSearchUIProps } from "./PreloadedSearchbar.interface";
 
 function PreloadedSearch<T>(props: PreloadedSearchUIProps<T>) {
   return (

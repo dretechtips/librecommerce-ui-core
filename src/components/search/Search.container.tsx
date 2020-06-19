@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { SearchState, SearchProps } from "../interface/Search.interface";
-import SearchUI from "../components/Search";
+import { SearchState, SearchProps } from "./Search.interface";
+import SearchUI from "./Search.component";
 import { AxiosResponse } from "axios";
 
 export class Search extends Component<SearchProps, SearchState> {

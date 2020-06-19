@@ -1,9 +1,9 @@
 import React from "react";
-import { LookupbarUIProps } from "../interface/Lookupbar.interface";
-import Searchbar from "./Searchbar";
+import { SBWithDropdownUIProps } from "./SBWithDropdown.inteface";
+import Searchbar from "src/components/search/searchbar/Searchbar.component";
 import { useHistory } from "react-router-dom";
 
-export function Lookupbar<T>(props: LookupbarUIProps<T>) {
+export function SBWithDropdown<T>(props: SBWithDropdownUIProps<T>) {
   const history = useHistory();
   return (
     <div>
@@ -54,4 +54,4 @@ export function Lookupbar<T>(props: LookupbarUIProps<T>) {
   );
 }
 
-export default Lookupbar;
+export default SBWithDropdown;

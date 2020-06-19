@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import {
-  LookupbarProps,
-  LookupbarState,
-  LookupbarResult,
-} from "../interface/Lookupbar.interface";
-import LookupbarUI from "../components/Lookupbar";
+  SBWithDropdownProps,
+  SBWithDropdownState,
+  SBWithDropdownResult,
+} from "./SBWithDropdown.inteface";
+import SBWithDropdownUI from "./SBWithDropdown.component";
 
-export class Lookupbar<T extends {}> extends Component<
-  LookupbarProps<T>,
-  LookupbarState
+export class SBWithDropdown<T extends {}> extends Component<
+  SBWithDropdownProps<T>,
+  SBWithDropdownState
 > {
-  constructor(props: LookupbarProps<T>) {
+  constructor(props: SBWithDropdownProps<T>) {
     super(props);
     this.state = {
       result: [],
@@ -37,7 +37,7 @@ export class Lookupbar<T extends {}> extends Component<
   };
   render() {
     return (
-      <LookupbarUI<T>
+      <SBWithDropdownUI<T>
         {...this.props}
         unhighlight={this.unhighlight}
         highlighted={this.state.hovered}
@@ -49,4 +49,4 @@ export class Lookupbar<T extends {}> extends Component<
   }
 }
 
-export default Lookupbar;
+export default SBWithDropdown;

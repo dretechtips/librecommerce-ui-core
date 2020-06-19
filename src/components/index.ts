@@ -21,6 +21,6 @@ export * from "./profile";
 export * from "./progress";
 export * from "./queue";
 // Scenes
-// export * from  "./search"
+export * from "./search";
 export * from "./table";
 export * from "./viewer";

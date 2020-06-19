@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import {
   PreloadedSearchProps,
   PreloadedSearchState,
-} from "../interface/PreloadedSearch.interface";
-import PreloadedSearchUI from "../components/PreloadedSearch";
-import { ListItem } from "../interface/List.interface";
+} from "./PreloadedSearchbar.interface";
+import PreloadedSearchUI from "./PreloadedSearchbar.component";
+import { ListItem } from "src/components/list/List.interface";
 
 export class PreloadedSearch<T> extends Component<
   PreloadedSearchProps<T>,

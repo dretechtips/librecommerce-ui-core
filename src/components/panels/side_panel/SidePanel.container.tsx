@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { SidePanelProps, SidePanelState } from "./SidePanel.interface";
 import SidePanelUI from "./SidePanel.component";
+import getScreenType from "src/utils/ScreenToSize";
 
 export class SidePanel extends Component<SidePanelProps, SidePanelState> {
   constructor(props: SidePanelProps) {
@@ -56,6 +57,7 @@ export class SidePanel extends Component<SidePanelProps, SidePanelState> {
     return (
       <SidePanelUI
         {...this.props}
+        screen={getScreenType()}
         setActive={this.setActive}
         slide={{
           position: this.state.position,

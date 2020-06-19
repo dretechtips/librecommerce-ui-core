@@ -2,7 +2,6 @@ import React from "react";
 import { RouteComponentProps } from "react-router";
 
 export interface MainPanelProps {
-  routes: MainPanelRoute[];
   marginTop?: number;
   marginLeft?: number;
 }

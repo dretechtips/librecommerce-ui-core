@@ -1,4 +1,4 @@
-import { ListItem, ListItemAction } from "./List.interface";
+import { ListItem, ListItemAction } from "src/components/list/List.interface";
 
 export interface PreloadedSearchProps<T> {
   placeholder: string;
