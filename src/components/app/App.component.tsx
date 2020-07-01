@@ -3,22 +3,23 @@ import { AppUIProps } from "./App.interface";
 import { BrowserRouter } from "react-router-dom";
 import Login from "../login/Login.container";
 import "./App.scss";
+import Panels from "../panels/Panels.container";
 
 export function App(props: AppUIProps) {
+  const logoURL = window.location.host + "/" + props.logoPath;
+
   if (props.login) {
     return (
       <BrowserRouter>
-        <div className="App">{props.children}</div>
+        <Panels
+          navigation={props.navigation}
+          logoURL={logoURL}
+          profile={props.profile}
+        />
       </BrowserRouter>
     );
   } else {
-    return (
-      <Login
-        loginPath={props.loginPath}
-        setLogin={props.setLogin}
-        logoPath={props.logoPath}
-      />
-    );
+    return <Login setLogin={props.setLogin} logoURL={logoURL} />;
   }
 }
 

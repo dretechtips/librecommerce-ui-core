@@ -6,7 +6,7 @@ function Logout(props: LogoutProps) {
   return (
     <App.contextType.Consumer>
       {(value) => {
-        value.setLogin(false);
+        value.setLogout(window.location.host + "/api/account/logout");
         return props.children;
       }}
     </App.contextType.Consumer>

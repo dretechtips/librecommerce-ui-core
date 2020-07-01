@@ -22,7 +22,7 @@ export default (props: LoginUIProps) => {
                 <div className="card-body text-center">
                   <img
                     width="128"
-                    src={window.location.host + "/" + props.logoPath}
+                    src={props.logoURL}
                     alt="Logo"
                     className="mb-3"
                   />

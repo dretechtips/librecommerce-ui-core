@@ -2,9 +2,12 @@ import React from "react";
 import { SidePanelUIProps } from "./SidePanel.interface";
 import "./SidePanel.scss";
 import SidePanelItem from "./side_panel_item/SidePanelItem.component";
+import Config from "src/api/config/Config.component";
 import { useHistory } from "react-router";
 
 function SidePanel(props: SidePanelUIProps): JSX.Element {
+  const history = useHistory();
+
   return (
     <div className="sidepanel__container">
       <div
@@ -39,12 +42,16 @@ function SidePanel(props: SidePanelUIProps): JSX.Element {
                 >
                   <i className="fa fa-bars fa-2x text-success mx-2"></i>
                 </a>
-                <img
-                  src={props.logoURL}
-                  alt="Logo"
-                  width={40}
-                  className="img-fluid ml-1 align-top"
-                />
+                <Config>
+                  {(config) => (
+                    <img
+                      src={config.company.logoURL}
+                      alt="Logo"
+                      width={40}
+                      className="img-fluid ml-1 align-top"
+                    />
+                  )}
+                </Config>
               </span>
             </li>
           </ul>
@@ -63,7 +70,7 @@ function SidePanel(props: SidePanelUIProps): JSX.Element {
                   <SidePanelItem
                     title={cur.name}
                     icon={cur.name}
-                    onClick={() => useHistory().push(cur.path)}
+                    onClick={() => history.push(cur.path)}
                     isActive={false}
                     index={index}
                   />

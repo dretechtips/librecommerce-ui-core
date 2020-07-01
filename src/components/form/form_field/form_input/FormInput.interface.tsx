@@ -3,6 +3,6 @@ export interface FormInputProps<
 > {
   onChange?: (value: T) => void;
   onValid?: (value: boolean) => void;
-  defaultValue: T;
+  defaultValue?: T;
   readonly?: boolean;
 }

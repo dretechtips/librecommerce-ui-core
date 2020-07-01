@@ -8,12 +8,11 @@ function Panels(props: PanelsUIProps) {
   return (
     <div>
       <NavPanel
-        logoURL={props.logoURL}
         profile={props.profile}
-        toggle={props.toggleSide}
+        toggleSide={props.toggleSide}
         isOpen={props.side.isOpen}
       />
-      <SidePanel logoURL={props.logoURL} navigation={props.navigation} />
+      <SidePanel navigation={props.navigation} />
       <MainPanel />
     </div>
   );

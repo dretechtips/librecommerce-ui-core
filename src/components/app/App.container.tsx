@@ -13,6 +13,7 @@ export class App extends Component<AppProps, AppState> {
     this.state = {
       login: false,
       setLogin: this.setLogin,
+      setLogout: this.setLogout,
       logoURL: window.location.host + "/" + this.props.logoPath,
       profile: {
         name: "Name",
@@ -40,8 +41,7 @@ export class App extends Component<AppProps, AppState> {
   };
 
   public setLogin = (value: boolean, profile?: ProfileProps): void => {
-    if(value)
-      this.props.onLogin();
+    if (value) this.props.onLogin();
     this.setState({
       ...this.state,
       login: value,
@@ -53,13 +53,19 @@ export class App extends Component<AppProps, AppState> {
     this.setState({ ...this.state, path: value });
   };
 
+  public setLogout = (url: string): void => {
+    // TODO
+  };
+
   render() {
     return (
       <App.contextType.Provider value={this.state}>
         <AppUI
           {...this.props}
+          profile={this.state.profile}
           login={this.state.login}
           setLogin={this.state.setLogin}
+          setLogout={this.state.setLogout}
         />
       </App.contextType.Provider>
     );

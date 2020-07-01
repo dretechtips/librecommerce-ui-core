@@ -1,21 +1,15 @@
-import { FormUIProps, FormRelation } from "../interface/Form.interface";
+import { FormUIProps, FormRelation, FormEntryType } from "./Form.interface";
 import React, { useRef, MutableRefObject } from "react";
 import Button from "../button/Button.component";
 import Alert from "../alert/Alert.component";
-import { scrollToTop } from "../../utils/Element";
-import FormFields from "../containers/FormFields";
-import Card from "../card/Card.container";
-import * as StringUtil from "../../utils/StringUtil";
+import { scrollToTop } from "src/utils/Elements";
+import FormFields from "./form_field/FormField.component";
+import Card from "src/components/card/Card.component";
+import * as StringUtil from "src/utils/StringUtil";
 
-function Form<T>(props: FormUIProps<T>) {
+function Form(props: FormUIProps) {
   const ref = useRef<HTMLDivElement>(null);
-  function submit(ref: MutableRefObject<HTMLDivElement>) {
-    scrollToTop(ref);
-    if (props.submit) props.submit();
-  }
-  // Object.keys(props.fields.questions).forEach(key =>
-  //   console.log(key, props.fields.questions[key as keyof FormRelation<T>])
-  // );
+
   return (
     <React.Fragment>
       <Card theme="success" border="success">
@@ -34,13 +28,33 @@ function Form<T>(props: FormUIProps<T>) {
           {props.note && <span>{props.note}</span>}
         </div>
       </Card>
-      <FormFields {...props.fields} onInput={props.onInput} />
-      {props.submit && (
+      {Object.keys(props.children).map((key) =>
+        props.children[key](
+          () => {
+            props.setEntryType(key, FormEntryType.FIELD);
+            return {
+              onChange: (val) => props.handleChange(key, val),
+              readonly: props.modifier === "read" ? true : false,
+            };
+          },
+          () => {
+            props.setEntryType(key, FormEntryType.GROUP);
+            return {
+              onChange: (val) => props.handleChange(key, val),
+              modifier: props.modifier,
+              submitable: false,
+            };
+          }
+        )
+      )}
+      {props.submittable && (
         <div className="form-group">
           <Button
             value="Submit"
             color="primary"
-            action={() => submit(ref as React.MutableRefObject<HTMLDivElement>)}
+            action={() =>
+              props.submit(ref as React.MutableRefObject<HTMLDivElement>)
+            }
           />
         </div>
       )}

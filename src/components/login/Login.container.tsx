@@ -20,7 +20,8 @@ export class Login extends Component<LoginProps, LoginState> {
   public render() {
     return (
       <LoginUI
-        logoPath={this.props.logoPath}
+        {...this.props}
+        loginURL={window.location.host + "/api/account/login"}
         login={this.login}
         failed={this.state.failed}
       />

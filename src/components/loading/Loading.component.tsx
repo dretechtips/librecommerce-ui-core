@@ -21,3 +21,5 @@ export function Loading(props: LoadingProps): JSX.Element {
     );
   else return element as JSX.Element;
 }
+
+export default Loading;

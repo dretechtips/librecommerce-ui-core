@@ -3,7 +3,6 @@ import { ScreenType } from "src/utils/ScreenToSize";
 
 export interface SidePanelProps {
   top?: number;
-  logoURL: string;
   navigation: AppNavGroup[];
 }
 
