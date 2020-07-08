@@ -61,7 +61,7 @@ export class PhotoInput extends Component<PhotoInputProps, PhotoInputState> {
         {...this.props}
         photos={this.state.photos}
         setPhotos={this.readPhotosFile}
-        fileUpload={{
+        fileInput={{
           set: this.setFileUpload,
           toggle: this.toggleFileUpload,
           remove: {

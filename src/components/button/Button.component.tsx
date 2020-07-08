@@ -14,10 +14,7 @@ export function Button(props: ButtonProps): JSX.Element {
           (props.className ? props.className : "")
         }
         disabled
-        onClick={(e: React.MouseEvent) => {
-          if (props.actionArgs) props.action(...props.actionArgs);
-          else props.action();
-        }}
+        onClick={props.onClick}
       >
         {props.icon ? (
           <i className={props.icon + (props.value !== "" ? " mr-2" : "")}></i>
@@ -38,10 +35,7 @@ export function Button(props: ButtonProps): JSX.Element {
           " " +
           (props.className ? props.className : "")
         }
-        onClick={(e: React.MouseEvent) => {
-          if (props.actionArgs) props.action(...props.actionArgs);
-          else props.action();
-        }}
+        onClick={props.onClick}
       >
         {props.icon ? (
           <i className={props.icon + (props.value !== "" ? " mr-2" : "")}></i>

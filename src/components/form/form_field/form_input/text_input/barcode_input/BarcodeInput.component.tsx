@@ -1,20 +1,20 @@
 import React from "react";
-import {
-  BarcodeInputUIProps,
-  BarcodeInputType,
-} from "./BarcodeInput.interface";
+import { BarcodeInputUIProps } from "./BarcodeInput.interface";
 import Modal from "src/components/modal/Modal.component";
 import Alert from "src/components/alert/Alert.component";
 import Button from "src/components/button/Button.component";
 import List from "src/components/list/List.container";
 import TextInput from "../TextInput.container";
+import TextListItem from "src/components/list/list_item/text_list_item/TextListItem.component";
+import { TextListItemProps } from "src/components/list/list_item/text_list_item/TextListItem.interface";
+import { ListMode } from "src/components/list";
 
 function BarcodeInput(props: BarcodeInputUIProps): JSX.Element {
   const input: JSX.Element = (
     <TextInput
       {...props}
       example="EAN/UPC/Code_128/Code_39/Code_93/Codabar/i2of5"
-      readOnly={true}
+      readonly={true}
       append={[
         {
           type: "button",
@@ -61,7 +61,7 @@ function BarcodeInput(props: BarcodeInputUIProps): JSX.Element {
                     icon="fas fa-compress"
                     value="Fullscreen"
                     color="success"
-                    action={() => props.fullscreen()}
+                    onClick={() => props.fullscreen()}
                   />
                 </div>
                 <video
@@ -90,25 +90,11 @@ function BarcodeInput(props: BarcodeInputUIProps): JSX.Element {
           body={
             <div className="row">
               <div className="col">
-                <List
+                <List<TextListItemProps>
+                  mode={ListMode.READ}
                   items={{
-                    elements: [
-                      { value: "EAN", id: "ean" },
-                      { value: "UPC", id: "upc" },
-                      { value: "CODE 128", id: "code_128" },
-                      { value: "CODE 39", id: "code_39" },
-                      { value: "CODE 93", id: "code_93" },
-                      { value: "CODABAR", id: "codabar" },
-                      { value: "I2 OF 5", id: "i2of5" },
-                    ],
-                    actions: [
-                      {
-                        name: "Select",
-                        icon: "fas fa-check-circle",
-                        func: (id) =>
-                          props.updateScanner(id as BarcodeInputType),
-                      },
-                    ],
+                    ui: TextListItem,
+                    get: props.options,
                   }}
                 />
               </div>

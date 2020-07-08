@@ -27,7 +27,7 @@ export interface FormProps {
   note?: string;
   modifier: FormModifier;
   submittable: boolean;
-  onSubmit?: (status: "success" | "failure") => void;
+  onSubmit?: (status: FormStatus, res?: AxiosResponse) => void;
   onChange?: (values: { [key: string]: any }) => void;
 }
 
@@ -57,6 +57,8 @@ export enum FormEntryType {
   FIELD,
   GROUP,
 }
+
+export type FormStatus = "success" | "failure";
 
 // export type FormQuestionProps = FormInputConditional<FormInputs> & {
 //   label: string;

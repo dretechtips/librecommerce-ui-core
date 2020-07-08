@@ -11,17 +11,21 @@ function Pagination(props: PaginationUIProps) {
             href="javascript:void"
             onClick={props.toPrev}
           >
-            Previous
+            <i className="fas fa-arrow-left"></i>
           </a>
         </li>
-        {props.renderItems()}
+        <li className="page-item">
+          <a className="page-link" href="javascript:void">
+            {props.current}
+          </a>
+        </li>
         <li className="page-item">
           <a
             className="page-link"
             href="javascript:void"
             onClick={props.toNext}
           >
-            Next
+            <i className="fas fa-arrow-right"></i>
           </a>
         </li>
       </ul>

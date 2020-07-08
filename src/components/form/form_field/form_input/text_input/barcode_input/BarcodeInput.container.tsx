@@ -6,22 +6,39 @@ import {
   BarcodeInputType,
 } from "./BarcodeInput.interface";
 import BarcodeInputUI from "./BarcodeInput.component";
+import { TextListItemProps, ListItem } from "src/components/list";
 
 class BarcodeInput extends Component<BarcodeInputProps, BarcodeInputState> {
+  private options: ListItem<TextListItemProps>["get"] = async () =>
+    [
+      { text: "EAN", id: "ean" },
+      { text: "UPC", id: "upc" },
+      { text: "CODE 128", id: "code_128" },
+      { text: "CODE 39", id: "code_39" },
+      { text: "CODE 93", id: "code_93" },
+      { text: "CODABAR", id: "codabar" },
+      { text: "I2 OF 5", id: "i2of5" },
+    ].map((item) => {
+      return {
+        ...item,
+        onClick: () => this.updateScanner(item.id as BarcodeInputType),
+      };
+    });
+
   cameraView: HTMLDivElement | null;
   camera: HTMLVideoElement | null;
   constructor(props: BarcodeInputProps) {
     super(props);
     this.state = {
       mode: "standby",
-      value: this.props.value ? String(this.props.value) : "",
+      value: this.props.defaultValue ?? "",
       error: null,
       scanType: "upc",
     };
     this.cameraView = null;
     this.camera = null;
   }
-  readerAdapter(): string {
+  public readerAdapter(): string {
     switch (this.state.scanType) {
       case "ean":
         return "ean_reader";
@@ -41,7 +58,7 @@ class BarcodeInput extends Component<BarcodeInputProps, BarcodeInputState> {
         throw new TypeError("Invalid Scan Type");
     }
   }
-  start = () => {
+  public start = () => {
     this.setState({ ...this.state, mode: "selecting" });
   };
   init = (ref: HTMLDivElement | null): void => {
@@ -78,30 +95,31 @@ class BarcodeInput extends Component<BarcodeInputProps, BarcodeInputState> {
       }
     );
   };
-  cameraSetup = (ref: HTMLVideoElement | null) => {
+  public cameraSetup = (ref: HTMLVideoElement | null) => {
     if (ref === null) return;
     this.camera = ref;
   };
-  fullscreen = () => {
+  public fullscreen = () => {
     if (!this.camera) return;
     if (this.camera.requestFullscreen) this.camera.requestFullscreen();
-    else if (this.camera.webkitEnterFullScreen)
-      this.camera.webkitEnterFullScreen();
+    else if (typeof (this.camera as any).webkitEnterFullScreen === "function")
+      (this.camera as any).webkitEnterFullScreen();
   };
-  updateScanner = (id: BarcodeInputType) => {
+  public updateScanner = (id: BarcodeInputType) => {
     this.setState({ ...this.state, scanType: id, mode: "scanning" });
   };
-  exit = () => {
+  public exit = () => {
     Quagga.stop();
     this.setState({ ...this.state, mode: "standby" });
   };
-  componentDidCatch(error: Error) {
+  public componentDidCatch(error: Error) {
     this.setState({ ...this.state, mode: "error", error: error });
   }
-  render() {
+  public render() {
     return (
       <BarcodeInputUI
         {...this.props}
+        options={this.options}
         updateScanner={this.updateScanner}
         cameraSetup={this.cameraSetup}
         fullscreen={this.fullscreen}

@@ -1,20 +1,23 @@
-import { SearchQueries } from "./SearchForm.interface";
-import { SearchResultProps } from "./SearchResult.interface";
-import { AxiosRequestConfig, AxiosResponse } from "axios";
-import { HttpMethod } from "../service/http.service";
-import FormField from "../components/FormField";
-import { FormRelation } from "./Form.interface";
+import { AxiosResponse } from "axios";
+import { FormProps } from "../form";
+import { ButtonProps } from "../button";
+import { SearchResultProps } from "./search_result/SearchResult.interface";
+import { ListItemProps, QueryListItemProps } from "../list";
 
-export interface SearchProps {
-  title: string;
-  questions: FormRelation<any>;
-  search: (inputs: { [x: string]: any }) => Promise<AxiosResponse>;
+export interface SearchProps extends FormProps {
+  toResult: (object: { [key: string]: any }) => SearchResultProps;
+  onResults: (results: SearchResultProps[]) => void;
 }
 
 export interface SearchUIProps extends SearchProps {
-  result: string | number | boolean[][];
+  toListItem: (result: SearchResultProps) => QueryListItemProps;
+  results: SearchResultProps[];
+  hasSearched: boolean;
+  hasError: boolean;
 }
 
 export interface SearchState {
-  result: any[];
+  results: SearchResultProps[];
+  hasSearched: boolean;
+  hasError: boolean;
 }

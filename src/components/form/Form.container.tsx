@@ -1,11 +1,6 @@
 import React, { Component, MutableRefObject, ErrorInfo } from "react";
 import FormUI from "./Form.component";
-import {
-  FormProps,
-  FormState,
-  FormFieldID,
-  FormEntryType,
-} from "./Form.interface";
+import { FormProps, FormState, FormEntryType } from "./Form.interface";
 import { Tree, Leaf, Branch } from "src/data/Tree";
 import FormField from "./form_field/FormField.component";
 import { IS_DEBUG } from "src/env";

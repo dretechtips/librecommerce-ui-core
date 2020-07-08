@@ -1,4 +1,4 @@
-import { ReactChild } from "react";
+import { ReactChild, ReactNode } from "react";
 
 export interface CardProp {
   theme:
@@ -12,7 +12,7 @@ export interface CardProp {
     | "dark"
     | "white";
   title?: string;
-  children: ReactChild | ReactChild[];
+  children: ReactNode | ReactNode[];
   className?: string;
   border?:
     | "primary"

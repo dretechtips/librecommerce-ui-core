@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { FileInputProps, FileInputState } from "./FileInput.interface";
 import FileUploadUI from "./FileInput.component";
-import FormField from "../../FormField.container";
 
 export class FileUpload extends Component<FileInputProps, FileInputState> {
   constructor(props: FileInputProps) {

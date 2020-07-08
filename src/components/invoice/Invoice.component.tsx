@@ -21,7 +21,7 @@ function Invoice(props: InvoiceUIProps) {
                 color="success"
                 value="Print"
                 icon="fas fa-print"
-                action={() => window.print()}
+                onClick={() => window.print()}
               />
             </div>
           </div>

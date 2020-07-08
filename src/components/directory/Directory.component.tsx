@@ -16,7 +16,7 @@ function Directory<T extends DirectorySchemaType<any>>(
           props.display[0] ? props.display.map((cur) => Object.values(cur)) : []
         }
       />
-      <Pagination size={props.paginationSize} toPage={props.toPage} />
+      <Pagination setPage={props.toPage} />
     </div>
   );
 }

@@ -1,13 +1,12 @@
-import React from "react";
-import { DateRangeInputUIProps } from "./DateRangeInput.interface";
+import React, { useState } from "react";
+import { DateRangeInputProps } from "./DateRangeInput.interface";
 
-function DateRangeInput(props: DateRangeInputUIProps) {
-  function onInput(
-    start: React.FormEvent<HTMLInputElement> | null,
-    end: React.FormEvent<HTMLInputElement> | null
-  ) {
-    if (props.onInput) props.onInput({ start, end });
-  }
+function DateRangeInput(props: DateRangeInputProps) {
+  const [start, setStart] = useState<undefined | Date>(undefined);
+  const [end, setEnd] = useState<undefined | Date>(undefined);
+
+  props.onChange?.({ start, end });
+
   return (
     <div className="row">
       <div className="col-md-6">
@@ -16,7 +15,7 @@ function DateRangeInput(props: DateRangeInputUIProps) {
             type="date"
             className="form-control"
             placeholder="Start Date"
-            onInput={(e) => onInput(e, null)}
+            onInput={(e) => setStart(e.currentTarget.valueAsDate ?? undefined)}
             value={props.start ? props.start.toString() : undefined}
           />
         </div>
@@ -27,7 +26,7 @@ function DateRangeInput(props: DateRangeInputUIProps) {
             type="date"
             className="form-control"
             placeholder="End Date"
-            onInput={(e) => onInput(null, e)}
+            onInput={(e) => setEnd(e.currentTarget.valueAsDate ?? undefined)}
             value={props.start ? props.start.toString() : undefined}
           />
         </div>

@@ -1,146 +1,92 @@
 import React from "react";
-import { ListUIProps } from "./List.interface";
+import { ListUIProps, ListMode } from "./List.interface";
 import Button from "src/components/button/Button.component";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle as fasCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import { faCheckCircle as farCheckCircle } from "@fortawesome/free-regular-svg-icons";
-import { Manager, Reference, Popper } from "react-popper";
-import Popover from "src/components/popover/Popover.component";
-import { PopoverMenuItem } from "src/components/popover/popover_menu/PopoverMenu.interface";
-import PopoverMenu from "src/components/popover/popover_menu/PopoverMenu.component";
+import Dropdown from "../dropdown/Dropdown.component";
+import Modal from "../modal/Modal.component";
+import Pagination from "../pagination/Pagination.container";
+import { Loading } from "../loading";
+import { ListItemProps } from "./list_item";
 
-function List(props: ListUIProps) {
-  switch (props.modifier) {
-    case "read":
-      return (
-        <div>
-          <div className="row">
-            <div className="col-12">
-              <div className="d-flex justify-content-between mb-2">
-                {props.add ? (
+function List<T extends ListItemProps>(props: ListUIProps<T>) {
+  return (
+    <div>
+      <div className="row">
+        {/* List Action Bar */}
+        <div className="col-12">
+          <div className="d-flex justify-content-between mb-2">
+            {props.mode === ListMode.READ && (
+              <React.Fragment>
+                {props.allowAdd && (
                   <Button
+                    className="mr-2"
                     icon="fas fa-plus"
                     value="Add"
                     color="primary"
-                    action={props.add}
+                    onClick={() => {}}
                   />
-                ) : (
-                  ""
                 )}
-                {props.select ? (
+              </React.Fragment>
+            )}
+            {props.allowSelect && props.mode === ListMode.SELECT && (
+              <React.Fragment>
+                {props.allowDelete && (
                   <Button
-                    icon="fas fa-check-circle"
-                    value="Select"
+                    className="mr-2"
+                    icon="fas fa-minus"
+                    value="Delete"
                     color="primary"
-                    action={() => props.modify("select")}
+                    onClick={() => props.handleDelete()}
                   />
-                ) : (
-                  ""
                 )}
-              </div>
-            </div>
+              </React.Fragment>
+            )}
+            {props.allowMove && props.mode === ListMode.MOVE && (
+              <React.Fragment></React.Fragment>
+            )}
+            {props.actions?.filter((action) =>
+              action.mode.includes(props.mode)
+            )}
           </div>
-          <ul className="list-group">
-            {props.items.elements.map((cur, index) => (
-              <Manager>
-                <Reference>
-                  {({ ref }) => (
-                    <li
-                      className="list-group-item"
-                      key={cur.id}
-                      ref={ref}
-                      onClick={(e) => props.popover.toggle(index)}
-                      onTouchStart={(e) => props.popover.toggle(index)}
-                    >
-                      <div className="d-flex justify-content-between align-items-center">
-                        <div>{cur.value}</div>
-                        <div></div>
-                      </div>
-                    </li>
-                  )}
-                </Reference>
-                {props.items.actions && props.popover.value === index && (
-                  <Popper placement="bottom">
-                    {(popper) => (
-                      <Popover
-                        popper={popper}
-                        body={
-                          <PopoverMenu
-                            items={props.items.actions!.map((el) => {
-                              const props: PopoverMenuItem = {
-                                name: el.name,
-                                icon: el.icon,
-                                action: () => el.func(cur.id),
-                              };
-                              return props;
-                            })}
-                          />
-                        }
-                      />
-                    )}
-                  </Popper>
-                )}
-              </Manager>
-            ))}
-          </ul>
         </div>
-      );
-    case "select":
-      return (
-        <div>
-          <div className="row">
-            <div className="col-12">
-              <div className="d-flex justify-content-between mb-2">
-                <div>
-                  {props.select ? (
-                    props.select.remove ? (
-                      <Button
-                        className="mr-2"
-                        icon="fas fa-minus"
-                        value="Delete"
-                        color="primary"
-                        action={props.select.remove}
-                      />
-                    ) : (
-                      ""
-                    )
-                  ) : (
-                    ""
-                  )}
-                </div>
-                <Button
-                  value="Cancel"
-                  icon="fas fa-backspace"
-                  action={() => props.modify("read")}
-                  color="primary"
+      </div>
+
+      {/* List Items */}
+      <Loading>
+        {async () => {
+          const ListItemUI = props.items.ui;
+          const items = await props.lazyLoad();
+          return (
+            <ul className="list-group">
+              {items.map((item) => (
+                <ListItemUI
+                  {...item}
+                  mode={props.mode}
+                  isActive={false}
+                  color={"primary"}
                 />
-              </div>
-            </div>
-          </div>
-          <ul className="list-group">
-            {props.items.elements.map((cur, index) => (
-              <li
-                className="list-group-item"
-                key={cur.id}
-                onClick={() => props.selecting(index)}
-              >
-                <div className="d-flex justify-content-between">
-                  <div>{cur.value}</div>
-                  <div>
-                    {props.selected.find((cur) => cur === index) !==
-                    undefined ? (
-                      <FontAwesomeIcon icon={fasCheckCircle} />
-                    ) : (
-                      <FontAwesomeIcon icon={farCheckCircle} />
-                    )}
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      );
-  }
+              ))}
+            </ul>
+          );
+        }}
+      </Loading>
+
+      {/* List Context Bar */}
+      <div>
+        <Pagination current={props.page} setPage={props.setPage} />
+        <Dropdown
+          value={props.mode}
+          items={Object.values(props.mode)
+            .filter((value) => value != props.mode)
+            .map((value) => {
+              return {
+                name: value,
+                handler: () => props.handleMode(value as ListMode),
+              };
+            })}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default List;

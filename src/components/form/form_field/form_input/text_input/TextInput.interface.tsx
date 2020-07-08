@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../../../button/Button.component";
-import { ButtonProps } from "../../../button/Button.interface";
+import Button from "src/components/button/Button.component";
+import { ButtonProps } from "src/components/button/Button.interface";
 import { FormInputProps } from "../FormInput.interface";
 
 /**

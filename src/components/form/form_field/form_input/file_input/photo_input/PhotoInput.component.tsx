@@ -1,7 +1,7 @@
 import React from "react";
 import FileInput from "../FileInput.container";
 import { PhotoInputUIProps } from "./PhotoInput.interface";
-import PhotoViewer from "../../../../viewer/photo_viewer/PhotoViewer.container";
+import PhotoViewer from "src/components/viewer/photo_viewer/PhotoViewer.container";
 import { FileInputProps } from "../FileInput.interface";
 
 function PhotoInput(props: PhotoInputUIProps) {

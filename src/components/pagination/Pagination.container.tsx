@@ -5,71 +5,40 @@ import PaginationUI from "./Pagination.component";
 export class Pagination extends Component<PaginationProps, PaginationState> {
   constructor(props: PaginationProps) {
     super(props);
+    if ((props.total ?? 0) < (props.current ?? 0))
+      throw new Error("PageOutOfBoundException");
     this.state = {
-      current: 0,
-      display: {
-        start: 0,
-        end: this.props.size,
-      },
+      current: this.props.current ? this.props.current : 0,
     };
   }
-  public handleNext = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ): void => {
-    e.preventDefault();
+  public toNext = (): void => {
     this.setState({
       ...this.state,
-      display: {
-        start: this.state.display.start + this.props.size,
-        end: this.state.display.end + this.props.size,
-      },
+      current: this.state.current + 1,
     });
+    this.props.setPage(this.state.current + 1);
   };
-  public handlePrev = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ): void => {
-    e.preventDefault();
+  public toPrev = (): void => {
     this.setState({
       ...this.state,
-      display: {
-        start: this.state.display.start - this.props.size,
-        end: this.state.display.end - this.props.size,
-      },
+      current: this.state.current - 1,
     });
+    this.props.setPage(this.state.current - 1);
   };
-  public renderItems = (): JSX.Element[] => {
-    const dist: number = this.state.display.end - this.state.display.start;
-    return new Array(dist).fill(null).map((cur, index) => {
-      return (
-        <li className="page-item">
-          <a
-            className="page-link"
-            href="javascript:void"
-            onClick={(e) => this.toPage(e, index + this.state.display.start)}
-          >
-            {index + this.state.display.start}
-          </a>
-        </li>
-      );
-    });
+
+  private toPage = (page: number): void => {
+    this.setState({ ...this.state, current: page });
+    this.props.setPage(page);
   };
-  private toPage = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    index: number
-  ): void => {
-    e.preventDefault();
-    this.props.toPage(index);
-    this.setState({ ...this.state, current: index });
-  };
+
   render() {
     return (
       <PaginationUI
         {...this.props}
-        toNext={this.handleNext}
-        toPrev={this.handlePrev}
-        display={this.state.display}
         current={this.state.current}
-        renderItems={this.renderItems}
+        toPage={this.toPage}
+        toNext={this.toNext}
+        toPrev={this.toPrev}
       />
     );
   }

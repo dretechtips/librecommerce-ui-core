@@ -1,12 +1,12 @@
+import { ButtonProps } from "../button";
+
 export interface DropdownProps {
-  icon?: string;
-  name?: string;
-  element?: JSX.Element;
+  value: string;
   items: (DropdownItem | DashboardSplit)[];
 }
 
 export interface DropdownItem {
-  path: string;
+  handler: () => void;
   icon?: string;
   name?: string;
 }

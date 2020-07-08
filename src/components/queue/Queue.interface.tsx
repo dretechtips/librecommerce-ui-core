@@ -1,4 +1,4 @@
-import { ListItemAction } from "../list/List.interface";
+import { ListAction } from "../list/List.interface";
 
 export interface QueueProps {
   getAvaliable: () => Promise<QueueProcess[]>;

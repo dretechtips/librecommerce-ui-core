@@ -36,32 +36,32 @@ function Calander(props: CalanderUIProps) {
                 color="success"
                 icon="fas fa-arrow-left"
                 value=""
-                action={() => {}}
+                onClick={() => {}}
               />
               <Button
                 color="success"
                 icon="fas fa-arrow-right"
                 value=""
-                action={() => {}}
+                onClick={() => {}}
               />
             </ButtonGroup>
-            <Button color="success" value="Today" action={() => {}} />
+            <Button color="success" value="Today" onClick={() => {}} />
           </div>
           <ButtonGroup>
             <Button
               color="success"
               value="Month"
-              action={() => props.handleMode("month")}
+              onClick={() => props.handleMode("month")}
             />
             <Button
               color="success"
               value="Week"
-              action={() => props.handleMode("week")}
+              onClick={() => props.handleMode("week")}
             />
             <Button
               color="success"
               value="Day"
-              action={() => props.handleMode("day")}
+              onClick={() => props.handleMode("day")}
             />
           </ButtonGroup>
         </div>

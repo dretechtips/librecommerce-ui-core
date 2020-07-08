@@ -1,4 +1,5 @@
 import { TextInputProps } from "../TextInput.interface";
+import { ListItem, TextListItemProps } from "src/components/list";
 
 export interface BarcodeInputState {
   mode: BarcodeInputMode;
@@ -10,6 +11,7 @@ export interface BarcodeInputState {
 export interface BarcodeInputProps extends TextInputProps {}
 
 export interface BarcodeInputUIProps extends BarcodeInputProps {
+  options: ListItem<TextListItemProps>["get"];
   mode: BarcodeInputMode;
   value: string;
   start: () => void;

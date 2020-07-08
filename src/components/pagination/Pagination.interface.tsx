@@ -1,22 +1,16 @@
 export interface PaginationProps {
-  size: number;
-  toPage: (index: number) => void;
+  setPage: (page: number) => void;
+  total?: number;
+  current?: number;
 }
 
 export interface PaginationUIProps extends PaginationProps {
-  display: PaginationIndexer;
-  toNext: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-  toPrev: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   current: number;
-  renderItems: () => JSX.Element[];
+  toNext: () => void;
+  toPrev: () => void;
+  toPage: (page: number) => void;
 }
 
 export interface PaginationState {
-  display: PaginationIndexer;
   current: number;
-}
-
-interface PaginationIndexer {
-  start: number;
-  end: number;
 }

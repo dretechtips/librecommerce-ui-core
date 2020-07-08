@@ -22,7 +22,7 @@ function TextInput(props: TextInputUIProps) {
   function addons(addons: TextInputAddon[]) {
     return addons.map((cur) =>
       cur.type === "button" ? (
-        <Button value={cur.text} action={cur.action} color="primary" />
+        <Button value={cur.text} onClick={cur.action} color="primary" />
       ) : (
         <span className="input-group-text">{cur.text}</span>
       )

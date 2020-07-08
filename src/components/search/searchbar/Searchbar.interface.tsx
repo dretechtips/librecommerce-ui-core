@@ -1,19 +1,20 @@
-import { Component } from "react";
 import { ButtonProps } from "src/components/button/Button.interface";
 
 export interface SearchbarProps {
+  /**
+   * Placeholder value
+   */
   placeholder: string;
+  /**
+   * Search function
+   */
   search: (value: string) => void;
+  /**
+   * Input Value
+   */
   value?: string;
-  buttons?: SearchButton[];
-}
-
-export interface SearchFunction {
-  (value: string): void;
-}
-
-export interface SearchButton {
-  icon: string;
-  text?: string;
-  action: (...args: any) => any;
+  /**
+   * Additional Buttons
+   */
+  buttons?: ButtonProps[];
 }

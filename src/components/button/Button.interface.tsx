@@ -1,9 +1,8 @@
 export interface ButtonProps {
   value: string;
   color: ButtonColor;
-  action: (...args: any[]) => any;
+  onClick: (...args: any) => void;
   icon?: string;
-  actionArgs?: any[];
   hasOutline?: boolean;
   size?: "sm" | "lg";
   active?: boolean;
