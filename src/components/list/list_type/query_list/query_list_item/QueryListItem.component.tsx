@@ -1,9 +1,12 @@
 import React from "react";
-import { QueryListItemProps } from "./QueryListItem.interface";
-import ListItem from "../ListItem.component";
+import {
+  QueryListItemProps,
+  QueryListItemUIProps,
+} from "./QueryListItem.interface";
+import ListItem from "../../../list_items/list_item/ListItem.component";
 import { Button } from "src/components/button";
 
-function QueryListItem(props: QueryListItemProps) {
+function QueryListItem(props: QueryListItemUIProps) {
   return (
     <ListItem {...props}>
       <div className="row">

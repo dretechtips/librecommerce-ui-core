@@ -1,54 +1,39 @@
 import React from "react";
-import { SearchbarProps } from "./Searchbar.interface";
+import { SearchbarProps, SearchbarUIProps } from "./Searchbar.interface";
+import List from "src/components/list/List.container";
+import { ListMode } from "src/components/list";
+import TextListItem from "src/components/list/list_type/text_list/text_list_item/TextListItem.component";
+import QueryListItem from "src/components/list/list_type/query_list/query_list_item/QueryListItem.component";
 
-export function Searchbar(props: SearchbarProps): JSX.Element {
+export function Searchbar(props: SearchbarUIProps): JSX.Element {
   const ref: React.RefObject<HTMLInputElement> = React.createRef();
-  function getValue(): string {
-    const el: HTMLInputElement | null = ref.current;
-    if (el) return el.value;
-    else return "";
-  }
-  function keypress(e: React.KeyboardEvent): void {
-    e.preventDefault();
-    props.search(getValue());
-  }
+
   return (
-    <div className="row mb-3">
-      <div className="col-12">
-        <div className="input-group">
-          <input
-            type="text"
-            value={props.value}
-            className="form-control"
-            placeholder={props.placeholder}
-            ref={ref}
-            onKeyUp={(e) => keypress(e)}
-          />
-          {!props.buttons && (
-            <div className="input-group-append">
-              <button
-                className="input-group-text"
-                onClick={() => props.search(getValue())}
-              >
-                <i className="fas fa-search"></i>
-              </button>
-            </div>
-          )}
-          {props.buttons && (
-            <div className="input-group-append">
-              {props.buttons.map((button) => (
-                <button
-                  className="input-group-text"
-                  onClick={() => button.action()}
-                >
-                  <i className={button.icon}></i>
-                  {button.text && <span className="ml-2">{button.text}</span>}
-                </button>
-              ))}
-            </div>
+    <div>
+      <div className="input-group">
+        <input
+          type="text"
+          value={props.value}
+          className="form-control"
+          placeholder={props.placeholder}
+          ref={ref}
+          onChange={props.onKeypress}
+        />
+        <div className="input-group-append">
+          {!props.autoSearch && (
+            <button
+              className="input-group-text"
+              onClick={() => props.submit(ref.current?.value ?? "")}
+            >
+              <i className="fas fa-search"></i>
+            </button>
           )}
         </div>
       </div>
+      <List
+        mode={ListMode.READ}
+        items={{ ui: QueryListItem, get: async () => props.results }}
+      />
     </div>
   );
 }

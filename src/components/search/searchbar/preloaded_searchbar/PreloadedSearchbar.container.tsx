@@ -4,7 +4,7 @@ import {
   PreloadedSearchState,
 } from "./PreloadedSearchbar.interface";
 import PreloadedSearchUI from "./PreloadedSearchbar.component";
-import { ListItem } from "src/components/list/List.interface";
+import { ListItem } from "src/components/list/ListItem";
 
 export class PreloadedSearch<T> extends Component<
   PreloadedSearchProps<T>,

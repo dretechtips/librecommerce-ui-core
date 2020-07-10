@@ -2,8 +2,8 @@ import React from "react";
 import List from "src/components/list/List.container";
 import Searchbar from "src/components/search/searchbar/Searchbar.component";
 import { PreloadedSearchUIProps } from "./PreloadedSearchbar.interface";
-import { TextListItemProps } from "src/components/list/list_item/text_list_item/TextListItem.interface";
-import TextListItem from "src/components/list/list_item/text_list_item/TextListItem.component";
+import { TextListItemProps } from "src/components/list/list_type/text_list/text_list_item/TextListItem.interface";
+import TextListItem from "src/components/list/list_type/text_list/text_list_item/TextListItem.component";
 import { ListMode } from "src/components/list";
 
 function PreloadedSearch<T>(props: PreloadedSearchUIProps<T>) {

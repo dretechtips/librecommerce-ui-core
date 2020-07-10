@@ -1,72 +1,50 @@
-import { ListItemProps, ListItemUIProps } from "./list_item";
+import { ListItemProps, ListItemUIProps } from "./list_items/list_item";
 import { ButtonProps } from "../button";
-import QueryListItem from "./list_item/query_list_item/QueryListItem.component";
+import { ListItemsProps } from "./list_items/ListItems.interface";
+import { ListActionProps } from "./list_actions/list_action/ListAction.interface";
+import * as Bootstrap from "src/utils/Bootstrap";
+import { ListActionsProps } from "./list_actions/ListActions.interface";
 
-export interface ListProps<T extends ListItemProps> {
+export interface ListProps<
+  D extends ListItemProps = ListItemProps,
+  U extends ListItemUIProps = ListItemUIProps
+> {
   mode: ListMode;
   page?: number;
-  items: ListItem<T>;
-  actions?: ListAction<T>[];
+  pageSize: number;
+  color?: Bootstrap.Colors;
 
-  /**
-   * @param add Invoke this to add an item to the list
-   * @returns {JSX.Element} Modal Child Element
-   */
-  allowAdd?: (useAdd: (items: T[]) => void) => JSX.Element;
-  onAdd?: (items: T[]) => void;
-
-  allowDelete?: boolean;
-  onDelete?: (selected: T[]) => void;
+  items: ListItemsProps<D, U>;
+  actions: ListActionsProps<D>;
 
   allowSelect?: boolean;
-  onSelect?: (selected: T[]) => void;
-
+  onSelect?: (selected: D[]) => void;
   allowMove?: boolean;
-  onMove?: (items: T[]) => void;
-
-  readonly?: boolean;
+  onMove?: (items: D[]) => void;
 }
 
-export interface ListUIProps<T extends ListItemProps> extends ListProps<T> {
-  setPage: (page: number) => void;
-  lazyLoad: () => Promise<T[]>;
-  selectedIndexes: number[];
+export interface ListUIProps<
+  D extends ListItemProps,
+  U extends ListItemUIProps
+> extends ListProps<D, U> {
+  state: ListState<D>;
+  setState: (state: ListState<D>) => void;
+  lazyLoad: () => Promise<D[]>;
+  handlePage: (page: number) => void;
   handleMode: (mode: ListMode) => void;
-  handleSelect: (indexes: number[]) => void;
-  handleDelete: () => void;
-  useAdd: (items: T[]) => void;
+  handleMove: (from: number, to: number) => void;
+  handleSelect: (selected: number[]) => void;
 }
 
-export interface ListState<T extends ListItemProps> {
-  page: number;
-  items: T[];
-  mode: ListMode;
+export interface ListState<D extends ListItemProps> {
   selectedIndexes: number[];
+  items: D[];
+  mode: ListMode;
+  page: number;
 }
 
 export enum ListMode {
   READ = "READ",
   SELECT = "SELECT",
   MOVE = "MOVE",
-}
-
-export interface ListAction<T extends ListItemProps> extends ButtonProps {
-  mode: ListMode[];
-  state?: ListState<T>;
-  onClick: (state: ListState<T>) => void;
-}
-
-export interface ListAdd {
-  /**
-   * Used to render a ui that can
-   */
-  ui: (add: (items: ListItemProps[]) => void) => JSX.Element;
-}
-
-export interface ListItem<T extends ListItemProps> {
-  get: (
-    startIndex: number,
-    endIndex: number
-  ) => Promise<Omit<T, keyof Omit<ListItemUIProps, keyof ListItemProps>>[]>;
-  ui: React.ComponentType<T & ListItemUIProps>;
 }

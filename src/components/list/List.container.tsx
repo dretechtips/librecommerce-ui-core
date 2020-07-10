@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { ListProps, ListState, ListMode } from "./List.interface";
 import ListUI from "./List.component";
-import { ListItemProps } from "./list_item";
+import { ListItemProps, ListItemUIProps } from "./list_items/list_item";
 
-export class List<T extends ListItemProps> extends Component<
-  ListProps<T>,
-  ListState<T>
-> {
-  private increment: number;
-
-  constructor(props: ListProps<T>) {
+export class List<
+  T extends ListItemProps,
+  U extends ListItemUIProps
+> extends Component<ListProps<T, U>, ListState<T>> {
+  constructor(props: ListProps<T, U>) {
     super(props);
     this.state = {
       mode: this.props.mode,
@@ -17,7 +15,6 @@ export class List<T extends ListItemProps> extends Component<
       items: [],
       page: this.props.page ?? 0,
     };
-    this.increment = 20;
   }
 
   public getSelected = (indexes: number[]): T[] => {
@@ -41,29 +38,25 @@ export class List<T extends ListItemProps> extends Component<
     this.props.onSelect?.(this.getSelected(indexes));
   };
 
-  public handleDelete = () => {
-    const selected = this.getSelected(this.state.selectedIndexes);
-    const unselected = this.getUnselected(this.state.selectedIndexes);
+  public handlePage = (page: number) => {
     this.setState({
       ...this.state,
-      items: unselected,
-      selectedIndexes: new Array<number>(),
+      page,
     });
-    this.props.onDelete?.(selected);
   };
 
-  /**
-   * Allows the child modal to add to the list
-   * @param items List Items
-   */
-  public useAdd = (items: T[]) => {
-    this.setState({ ...this.state, items: this.state.items.concat(items) });
+  public handleMove = (from: number, to: number) => {
+    const a = this.state.items[from];
+    this.state.items[from] = this.state.items[to];
+    this.state.items[to] = a;
+    this.setState({ ...this.state });
+    this.props.onMove?.(this.state.items);
   };
 
   public lazyLoad = async () => {
     const items = await this.props.items.get?.(
-      this.state.page * this.increment,
-      (this.state.page + 1) * this.increment
+      this.state.page * this.props.pageSize,
+      (this.state.page + 1) * this.props.pageSize
     );
     this.setState({
       ...this.state,
@@ -72,15 +65,8 @@ export class List<T extends ListItemProps> extends Component<
     return items;
   };
 
-  public setPage = (page: number) => {
-    this.setState({
-      ...this.state,
-      page,
-    });
-  };
-
   public shouldComponentUpdate(
-    nextProps: ListProps<T>,
+    nextProps: ListProps<T, U>,
     nextState: ListState<T>
   ) {
     // Stops re-rendering on item update
@@ -92,15 +78,13 @@ export class List<T extends ListItemProps> extends Component<
     return (
       <ListUI
         {...this.props}
-        setPage={this.setPage}
+        state={this.state}
+        setState={this.setState.bind(this)}
         lazyLoad={this.lazyLoad}
-        page={this.state.page}
-        mode={this.state.mode}
-        selectedIndexes={this.state.selectedIndexes}
         handleMode={this.handleMode}
         handleSelect={this.handleSelect}
-        handleDelete={this.handleDelete}
-        useAdd={this.useAdd}
+        handleMove={this.handleMove}
+        handlePage={this.handlePage}
       />
     );
   }

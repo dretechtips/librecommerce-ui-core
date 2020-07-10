@@ -5,8 +5,8 @@ import Alert from "src/components/alert/Alert.component";
 import Button from "src/components/button/Button.component";
 import List from "src/components/list/List.container";
 import TextInput from "../TextInput.container";
-import TextListItem from "src/components/list/list_item/text_list_item/TextListItem.component";
-import { TextListItemProps } from "src/components/list/list_item/text_list_item/TextListItem.interface";
+import TextListItem from "src/components/list/list_type/text_list/text_list_item/TextListItem.component";
+import { TextListItemProps } from "src/components/list/list_type/text_list/text_list_item/TextListItem.interface";
 import { ListMode } from "src/components/list";
 
 function BarcodeInput(props: BarcodeInputUIProps): JSX.Element {

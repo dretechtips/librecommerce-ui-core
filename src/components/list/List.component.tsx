@@ -1,90 +1,35 @@
 import React from "react";
 import { ListUIProps, ListMode } from "./List.interface";
-import Button from "src/components/button/Button.component";
-import Dropdown from "../dropdown/Dropdown.component";
-import Modal from "../modal/Modal.component";
-import Pagination from "../pagination/Pagination.container";
-import { Loading } from "../loading";
-import { ListItemProps } from "./list_item";
+import { ListItemProps, ListItemUIProps } from "./list_items/list_item";
+import ListItems from "./list_items/ListItems.component";
+import ListContext from "./list_context/ListContext.component";
+import ListActions from "./list_actions/ListActions.component";
 
-function List<T extends ListItemProps>(props: ListUIProps<T>) {
+function List<D extends ListItemProps, U extends ListItemUIProps>(
+  props: ListUIProps<D, U>
+) {
   return (
     <div>
-      <div className="row">
-        {/* List Action Bar */}
-        <div className="col-12">
-          <div className="d-flex justify-content-between mb-2">
-            {props.mode === ListMode.READ && (
-              <React.Fragment>
-                {props.allowAdd && (
-                  <Button
-                    className="mr-2"
-                    icon="fas fa-plus"
-                    value="Add"
-                    color="primary"
-                    onClick={() => {}}
-                  />
-                )}
-              </React.Fragment>
-            )}
-            {props.allowSelect && props.mode === ListMode.SELECT && (
-              <React.Fragment>
-                {props.allowDelete && (
-                  <Button
-                    className="mr-2"
-                    icon="fas fa-minus"
-                    value="Delete"
-                    color="primary"
-                    onClick={() => props.handleDelete()}
-                  />
-                )}
-              </React.Fragment>
-            )}
-            {props.allowMove && props.mode === ListMode.MOVE && (
-              <React.Fragment></React.Fragment>
-            )}
-            {props.actions?.filter((action) =>
-              action.mode.includes(props.mode)
-            )}
-          </div>
-        </div>
-      </div>
+      <ListActions
+        {...props.actions}
+        state={props.state}
+        setState={props.setState}
+      />
 
-      {/* List Items */}
-      <Loading>
-        {async () => {
-          const ListItemUI = props.items.ui;
-          const items = await props.lazyLoad();
-          return (
-            <ul className="list-group">
-              {items.map((item) => (
-                <ListItemUI
-                  {...item}
-                  mode={props.mode}
-                  isActive={false}
-                  color={"primary"}
-                />
-              ))}
-            </ul>
-          );
-        }}
-      </Loading>
+      <ListItems
+        {...props.items}
+        color={props.color}
+        lazyLoad={props.lazyLoad}
+        mode={props.state.mode}
+        selectedIndexes={props.state.selectedIndexes}
+      />
 
-      {/* List Context Bar */}
-      <div>
-        <Pagination current={props.page} setPage={props.setPage} />
-        <Dropdown
-          value={props.mode}
-          items={Object.values(props.mode)
-            .filter((value) => value != props.mode)
-            .map((value) => {
-              return {
-                name: value,
-                handler: () => props.handleMode(value as ListMode),
-              };
-            })}
-        />
-      </div>
+      <ListContext
+        page={props.state.page}
+        setPage={props.handlePage}
+        mode={props.state.mode}
+        handleMode={props.handleMode}
+      />
     </div>
   );
 }

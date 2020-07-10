@@ -1,18 +1,16 @@
 import * as Bootstrap from "src/utils/Bootstrap";
-import { ListMode } from "../List.interface";
+import { ListMode } from "../../List.interface";
 
 export interface ListItemProps {
-  onClick?: () => void;
-
   id: string;
   name?: string;
   creationDate?: string;
   popularity?: number;
-  children?: React.ReactNode;
 }
 
 export interface ListItemUIProps extends ListItemProps {
+  onClick: () => void;
   isActive: boolean;
-  color: Bootstrap.Colors;
+  color?: Bootstrap.Colors;
   mode: ListMode;
 }

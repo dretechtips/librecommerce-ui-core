@@ -4,8 +4,8 @@ import { SearchUIProps } from "src/components/search/Search.interface";
 import List from "src/components/list/List.container";
 import Form from "../form/Form.container";
 import Alert from "../alert/Alert.component";
-import QueryListItem from "../list/list_item/query_list_item/QueryListItem.component";
-import { QueryListItemProps } from "src/components/list/list_item/query_list_item/QueryListItem.interface";
+import QueryListItem from "../list/list_type/query_list/query_list_item/QueryListItem.component";
+import { QueryListItemProps } from "src/components/list/list_type/query_list/query_list_item/QueryListItem.interface";
 import { ListMode } from "../list";
 
 function Search(props: SearchUIProps) {

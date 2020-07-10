@@ -1,4 +1,5 @@
-import { ListItem, ListItemAction } from "src/components/list/List.interface";
+import { ListItemAction } from "src/components/list/List.interface";
+import { ListItem } from "src/components/list/ListItem";
 import { TextListItemProps } from "src/components/list";
 import { SearchbarProps } from "../Searchbar.interface";
 
