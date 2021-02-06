@@ -1,4 +1,4 @@
-# Ruff Tiger React Core
+# Librecommerce React Core
 
 Ruff Tiger Frontend Framework for ReactJS. Includes TS support.
 
