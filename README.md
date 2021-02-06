@@ -1,6 +1,6 @@
 # Librecommerce UI Core
 
-Ruff Tiger Frontend Framework for ReactJS. Includes TS support.
+Librecommerce Frontend Framework for ReactJS. Includes TS support.
 
 Contains all the
 
