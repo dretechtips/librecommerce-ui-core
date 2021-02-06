@@ -1,4 +1,4 @@
-# Librecommerce React Core
+# Librecommerce UI Core
 
 Ruff Tiger Frontend Framework for ReactJS. Includes TS support.
 
@@ -13,7 +13,7 @@ Contains all the
 ## How to install
 
 ```
-npm install @ruff_tiger/react_core
+npm install @librecommerce/ui-core
 
 ```
 
